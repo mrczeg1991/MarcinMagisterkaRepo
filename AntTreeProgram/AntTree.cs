@@ -147,11 +147,34 @@ namespace AntTreeProgram
             double score = 0;
             if (ant!=null && antSupport!=null)
             {
-                double temp = Math.Pow(ant.Points.X - antSupport.Points.X,2) + Math.Pow(ant.Points.Y - antSupport.Points.Y,2);
-                double sqrt = Math.Sqrt(temp / 2);
+                double temp = CountDigitData(ant.Points.DigitData, antSupport.Points.DigitData) 
+                    + CountStringData(ant.Points.StringData, antSupport.Points.StringData);
+                double sqrt = Math.Sqrt(temp / ant.Points.DigitData.Count + ant.Points.StringData.Count);
                 score = 1 - sqrt;
             }
             return Math.Abs(score);
+        }
+        double CountStringData(List<string> antData, List<string> antSupportData)
+        {
+            double score = 0;
+            int i = 0;
+            foreach(string temp in antData)
+            {
+                if (temp == antSupportData[i]) score++;
+                    i++;
+            }
+            return score;
+        }
+        double CountDigitData(List<double> ant, List<double> antSupport)
+        {
+            double score = 0;
+            int i = 0;
+            foreach (double digit in ant)
+            {
+                score = Math.Pow(digit - antSupport[i], 2) + score;
+                i++;
+            }
+            return score;
         }
         Ant FindTheMostSimilarAnt(Ant ant, List<Ant> antBranches)
         {

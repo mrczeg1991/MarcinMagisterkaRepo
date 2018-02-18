@@ -41,10 +41,18 @@ namespace AntTreeProgram.DataXLS
             int i = 0;
             foreach(IrisData iris in IrisList)
             {
+                Points points = new Points();
+                points.DigitData.Add(iris.PetalLength);
+                points.DigitData.Add(iris.PetalWidth);
+                points.DigitData.Add(iris.SepalLength);
+                points.DigitData.Add(iris.SepalWidth);
+                points.StringData.Add(iris.Iris);
                 Ant ant = new Ant(0, 0)
                 {
                     Number = i,
+                    Points = points
                 };
+                antList.Add(ant);
                 i++;
             }
             return antList;
