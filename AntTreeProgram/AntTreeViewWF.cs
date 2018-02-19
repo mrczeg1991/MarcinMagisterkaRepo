@@ -22,8 +22,7 @@ namespace AntTreeProgram
 
         public void AddDataToChart(Ant ant, Color color)
         {
-            int index=Chart.Series[0].Points.AddXY(ant.Points.X, ant.Points.Y);
-            Chart.Series[0].Points[index].Color = color;
+           
         }
         public void ClearData()
         {
