@@ -10,7 +10,7 @@ namespace AntTreeProgram.DataXLS
 {
     class DownloadXLSIris : IDownloadXLS
     {
-        public List<IrisData> Iris { get; set; } = new List<IrisData>();
+        public List<IrisData> IrisList { get; set; } = new List<IrisData>();
         public void ReadData()
         {
             string sheetName = "Iris";
@@ -26,7 +26,7 @@ namespace AntTreeProgram.DataXLS
                     SepalLength=iris.SepalLength,
                     SepalWidth=iris.SepalWidth
                 };
-                Iris.Add(irisTemp);
+                IrisList.Add(irisTemp);
             }
         }
         public string GetPath()
@@ -38,6 +38,23 @@ namespace AntTreeProgram.DataXLS
         public List<Ant> GetAntTreeList()
         {
             List<Ant> antList = new List<Ant>();
+            int i = 0;
+            foreach(IrisData iris in IrisList)
+            {
+                Points points = new Points();
+                points.DigitData.Add(iris.PetalLength);
+                points.DigitData.Add(iris.PetalWidth);
+                points.DigitData.Add(iris.SepalLength);
+                points.DigitData.Add(iris.SepalWidth);
+                points.StringData.Add(iris.Iris);
+                Ant ant = new Ant(0, 0)
+                {
+                    Number = i,
+                    Points = points
+                };
+                antList.Add(ant);
+                i++;
+            }
             return antList;
         }
     }
