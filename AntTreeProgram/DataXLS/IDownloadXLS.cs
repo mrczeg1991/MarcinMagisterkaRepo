@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace AntTreeProgram.DataXLS
 {
-    enum DataName
-    {
-        Iris = 0,
-    }
+   
     interface IDownloadXLS
     {
         void ReadData();

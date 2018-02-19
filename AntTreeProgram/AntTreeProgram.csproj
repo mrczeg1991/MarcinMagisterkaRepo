@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\IrisData.cs" />
+    <Compile Include="Adapters\WineData.cs" />
     <Compile Include="Ant\Ant.cs" />
     <Compile Include="Ant\AntBranch.cs" />
     <Compile Include="AntTree.cs" />
@@ -76,6 +77,8 @@
     <Compile Include="Colors.cs" />
     <Compile Include="CheckScoreTools\DunnIndex.cs" />
     <Compile Include="DataXLS\DownloadXLSIris.cs" />
+    <Compile Include="DataXLS\DownloadXLSWine.cs" />
+    <Compile Include="DataXLS\FabrykaXLS.cs" />
     <Compile Include="DataXLS\IDownloadXLS.cs" />
     <Compile Include="IAntTreeView.cs" />
     <Compile Include="Test\Kmeans.cs" />

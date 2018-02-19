@@ -36,9 +36,9 @@ namespace AntTreeProgram
         {
             c_dissim.Items.Add(value);
         }
-        public void AddToAlgorythmCombobox(string nazwa)
+        public void AddToRepoCombobox(XLSData nazwa)
         {
-            c_algorythm.Items.Add(nazwa);
+            cb_Repo.Items.Add(nazwa);
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -56,10 +56,10 @@ namespace AntTreeProgram
             return value??"0";
         }
         
-        public string GetAlgorythmName()
+        public XLSData GetRepoName()
         {
-            object value = c_algorythm.SelectedItem??"AntTree";
-            return value.ToString();
+            object value = cb_Repo.SelectedItem??XLSData.Iris;
+            return (XLSData)value;
         }
         public object GetSim()
         {

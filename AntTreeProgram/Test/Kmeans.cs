@@ -17,7 +17,7 @@ namespace AntTreeProgram
             int i = 0;
             foreach(Ant ant in list)
             {
-                rawData[i] = new double[] {ant.Points.X, ant.Points.Y};
+                //rawData[i] = new double[] {ant.Points.X, ant.Points.Y};
                 i++;
             }
             return rawData;

@@ -33,7 +33,7 @@
             this.p_Sim = new System.Windows.Forms.Panel();
             this.tb_NumberGroups = new System.Windows.Forms.TextBox();
             this.lbl_dunn = new System.Windows.Forms.Label();
-            this.c_algorythm = new System.Windows.Forms.ComboBox();
+            this.cb_Repo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.l_NumberGroups = new System.Windows.Forms.Label();
             this.c_dissim = new System.Windows.Forms.ComboBox();
@@ -51,7 +51,7 @@
             // 
             this.p_Sim.Controls.Add(this.tb_NumberGroups);
             this.p_Sim.Controls.Add(this.lbl_dunn);
-            this.p_Sim.Controls.Add(this.c_algorythm);
+            this.p_Sim.Controls.Add(this.cb_Repo);
             this.p_Sim.Controls.Add(this.label1);
             this.p_Sim.Controls.Add(this.l_NumberGroups);
             this.p_Sim.Controls.Add(this.c_dissim);
@@ -79,22 +79,22 @@
             this.lbl_dunn.TabIndex = 7;
             this.lbl_dunn.Text = "Dunn index:";
             // 
-            // c_algorythm
+            // cb_Repo
             // 
-            this.c_algorythm.FormattingEnabled = true;
-            this.c_algorythm.Location = new System.Drawing.Point(13, 23);
-            this.c_algorythm.Name = "c_algorythm";
-            this.c_algorythm.Size = new System.Drawing.Size(165, 21);
-            this.c_algorythm.TabIndex = 6;
+            this.cb_Repo.FormattingEnabled = true;
+            this.cb_Repo.Location = new System.Drawing.Point(13, 23);
+            this.cb_Repo.Name = "cb_Repo";
+            this.cb_Repo.Size = new System.Drawing.Size(165, 21);
+            this.cb_Repo.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(10, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.Size = new System.Drawing.Size(74, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Algorytm:";
+            this.label1.Text = "Repozytorium:";
             // 
             // l_NumberGroups
             // 
@@ -204,7 +204,7 @@
         private System.Windows.Forms.Button btn_Group;
         private System.Windows.Forms.Label l_NumberGroups;
         private System.Windows.Forms.DataVisualization.Charting.Chart Chart;
-        private System.Windows.Forms.ComboBox c_algorythm;
+        private System.Windows.Forms.ComboBox cb_Repo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_dunn;
         private System.Windows.Forms.TextBox tb_NumberGroups;

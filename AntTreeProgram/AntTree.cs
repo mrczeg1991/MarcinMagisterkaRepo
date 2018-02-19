@@ -149,7 +149,7 @@ namespace AntTreeProgram
             {
                 double temp = CountDigitData(ant.Points.DigitData, antSupport.Points.DigitData) 
                     + CountStringData(ant.Points.StringData, antSupport.Points.StringData);
-                double sqrt = Math.Sqrt(temp / ant.Points.DigitData.Count + ant.Points.StringData.Count);
+                double sqrt = Math.Sqrt(temp / (ant.Points.DigitData.Count + ant.Points.StringData.Count));
                 score = 1 - sqrt;
             }
             return Math.Abs(score);
@@ -160,7 +160,7 @@ namespace AntTreeProgram
             int i = 0;
             foreach(string temp in antData)
             {
-                if (temp == antSupportData[i]) score++;
+                if (temp != antSupportData[i]) score++;
                     i++;
             }
             return score;

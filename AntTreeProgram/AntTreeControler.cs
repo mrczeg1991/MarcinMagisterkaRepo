@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntTreeProgram.DataXLS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,7 @@ namespace AntTreeProgram
         public AntTreeControler(IAntTreeView view)
         {
             this.view = view;
-            PrepareData prepare = new PrepareData();
-            antsList = prepare.RandomAnts(8, GetSim(), GetDissim());
+
         }
         public void SetOnStart()
         {
@@ -26,15 +26,15 @@ namespace AntTreeProgram
         }
         void SetAlgorythmName()
         {
-            view.AddToAlgorythmCombobox("AntTree");
-            view.AddToAlgorythmCombobox("k-means");
+            view.AddToRepoCombobox(XLSData.Iris);
+            view.AddToRepoCombobox(XLSData.Wina);
 
         }
         void SetSim()
         {
             List<double> values = new List<double>()
             {
-                0.005,0.01,0.05,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.95,0.99
+                0.005,0.01,0.05,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.85,0.9,0.95,0.98,0.99
             };
             foreach(double d in values)
             {
@@ -81,20 +81,18 @@ namespace AntTreeProgram
         }
         public void GroupData()
         {
-            if (view.GetAlgorythmName() == "AntTree")
+            view.SetDunnIndex(0);
+            view.SetGroupNumber(0);
+            IDownloadXLS xls = FabrykaXLS.CreateXLSObject(view.GetRepoName());
+            xls.ReadData();
+            antsList=xls.GetAntTreeList();
+            antsList.ForEach(a =>
             {
-                antsList.ForEach(a =>
-                {
-                    a.TDissim = GetDissim();
-                    a.TSim = GetSim();
-                });
-                AntTree antTreeAlgorythm = new AntTree();
-                antBranches = antTreeAlgorythm.AntTreeAlgorythm(antsList);
-            }
-            else
-            {
-                antBranches=Kmeans.KMeans(antsList,view.GetNumberGroups());
-            }
+                a.TDissim = GetDissim();
+                a.TSim = GetSim();
+            });
+            AntTree antTreeAlgorythm = new AntTree();
+            antBranches = antTreeAlgorythm.AntTreeAlgorythm(antsList);           
         }
     }
 }

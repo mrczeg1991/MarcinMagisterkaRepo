@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntTreeProgram.DataXLS;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -17,8 +18,8 @@ namespace AntTreeProgram
         void ClearData();
 
         void SetGroupNumber(int number);
-        void AddToAlgorythmCombobox(string nazwa);
-        string GetAlgorythmName();
+        void AddToRepoCombobox(XLSData nazwa);
+        XLSData GetRepoName();
 
         void SetDunnIndex(double index);
 
