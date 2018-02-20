@@ -15,19 +15,7 @@ namespace AntTreeProgram.DataXLS
         {
             string sheetName = "Iris";
             var irisFile = new ExcelQueryFactory(GetPath());
-            var irisData = from a in irisFile.Worksheet<IrisData>(sheetName) select a;
-            foreach (var iris in irisData)
-            {
-                IrisData irisTemp = new IrisData()
-                {
-                    Iris = iris.Iris,
-                    PetalLength= iris.PetalLength,
-                    PetalWidth=iris.PetalWidth,
-                    SepalLength=iris.SepalLength,
-                    SepalWidth=iris.SepalWidth
-                };
-                IrisList.Add(irisTemp);
-            }
+            IrisList = (from a in irisFile.Worksheet<IrisData>(sheetName) select a).ToList();
         }
         public string GetPath()
         {
@@ -42,10 +30,10 @@ namespace AntTreeProgram.DataXLS
             foreach(IrisData iris in IrisList)
             {
                 Points points = new Points();
-                points.DigitData.Add(iris.PetalLength);
-                points.DigitData.Add(iris.PetalWidth);
-                points.DigitData.Add(iris.SepalLength);
-                points.DigitData.Add(iris.SepalWidth);
+                points.DigitData.Add(PrepareDigit(iris.PetalLength,6.9));
+                points.DigitData.Add(PrepareDigit(iris.PetalWidth,2.5));
+                points.DigitData.Add(PrepareDigit(iris.SepalLength,7.9));
+                points.DigitData.Add(PrepareDigit(iris.SepalWidth,4.4));
                 points.StringData.Add(iris.Iris);
                 Ant ant = new Ant(0, 0)
                 {
@@ -56,6 +44,10 @@ namespace AntTreeProgram.DataXLS
                 i++;
             }
             return antList;
+        }
+        double PrepareDigit(double digit, double max)
+        {
+            return digit / max;
         }
     }
 }

@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\GlassData.cs" />
     <Compile Include="Adapters\IrisData.cs" />
     <Compile Include="Adapters\WineData.cs" />
     <Compile Include="Ant\Ant.cs" />
@@ -76,6 +77,7 @@
     </Compile>
     <Compile Include="Colors.cs" />
     <Compile Include="CheckScoreTools\DunnIndex.cs" />
+    <Compile Include="DataXLS\DownloadXLSGlass.cs" />
     <Compile Include="DataXLS\DownloadXLSIris.cs" />
     <Compile Include="DataXLS\DownloadXLSWine.cs" />
     <Compile Include="DataXLS\FabrykaXLS.cs" />

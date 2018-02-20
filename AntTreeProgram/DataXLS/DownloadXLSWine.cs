@@ -19,19 +19,19 @@ namespace AntTreeProgram.DataXLS
             {
                 Points points = new Points();
                 points.StringData.Add(wine.Type);
-                points.DigitData.Add(PrepareDigit(wine.Alcohol, 13.001));
-                points.DigitData.Add(PrepareDigit(wine.MalicAcid, 2.34));
-                points.DigitData.Add(PrepareDigit(wine.Ash, 2.37));
-                points.DigitData.Add(PrepareDigit(wine.AshAlcalinity, 19.49));
-                points.DigitData.Add(PrepareDigit(wine.Magnesium, 99.8));
-                points.DigitData.Add(PrepareDigit(wine.Total_Phenols, 2.3));
-                points.DigitData.Add(PrepareDigit(wine.Flavanoids, 2.03));
-                points.DigitData.Add(PrepareDigit(wine.Nonflavanoid_Phenols, 0.36));
-                points.DigitData.Add(PrepareDigit(wine.Proanthocyanins, 1.59));
-                points.DigitData.Add(PrepareDigit(wine.ColorIntensity, 5.06));
-                points.DigitData.Add(PrepareDigit(wine.Hue, 0.96));
-                points.DigitData.Add(PrepareDigit(wine.OD280_OD315, 2.611));
-                points.DigitData.Add(PrepareDigit(wine.Proline, 746.9));
+                points.DigitData.Add(PrepareDigit(wine.Alcohol, 14.83));
+                points.DigitData.Add(PrepareDigit(wine.MalicAcid, 5.8));
+                points.DigitData.Add(PrepareDigit(wine.Ash, 3.23));
+                points.DigitData.Add(PrepareDigit(wine.AshAlcalinity, 30));
+                points.DigitData.Add(PrepareDigit(wine.Magnesium, 162));
+                points.DigitData.Add(PrepareDigit(wine.Total_Phenols, 3.88));
+                points.DigitData.Add(PrepareDigit(wine.Flavanoids, 5.08));
+                points.DigitData.Add(PrepareDigit(wine.Nonflavanoid_Phenols, 0.66));
+                points.DigitData.Add(PrepareDigit(wine.Proanthocyanins, 3.58));
+                points.DigitData.Add(PrepareDigit(wine.ColorIntensity, 13));
+                points.DigitData.Add(PrepareDigit(wine.Hue, 1.71));
+                points.DigitData.Add(PrepareDigit(wine.OD280_OD315, 4));
+                points.DigitData.Add(PrepareDigit(wine.Proline, 1680));
                 Ant ant = new Ant(0, 0)
                 {
                     Number = i,
