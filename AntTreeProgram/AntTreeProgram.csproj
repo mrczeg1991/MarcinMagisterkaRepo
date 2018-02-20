@@ -64,6 +64,8 @@
   <ItemGroup>
     <Compile Include="Adapters\GlassData.cs" />
     <Compile Include="Adapters\IrisData.cs" />
+    <Compile Include="Adapters\KnowledgeData.cs" />
+    <Compile Include="Adapters\SurvivalData.cs" />
     <Compile Include="Adapters\WineData.cs" />
     <Compile Include="Ant\Ant.cs" />
     <Compile Include="Ant\AntBranch.cs" />
@@ -77,8 +79,10 @@
     </Compile>
     <Compile Include="Colors.cs" />
     <Compile Include="CheckScoreTools\DunnIndex.cs" />
+    <Compile Include="DataXLS\DownloadXLSKnowledge.cs" />
     <Compile Include="DataXLS\DownloadXLSGlass.cs" />
     <Compile Include="DataXLS\DownloadXLSIris.cs" />
+    <Compile Include="DataXLS\DownloadXLSSurvival.cs" />
     <Compile Include="DataXLS\DownloadXLSWine.cs" />
     <Compile Include="DataXLS\FabrykaXLS.cs" />
     <Compile Include="DataXLS\IDownloadXLS.cs" />

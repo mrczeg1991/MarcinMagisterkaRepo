@@ -28,6 +28,9 @@ namespace AntTreeProgram
         {
             view.AddToRepoCombobox(XLSData.Iris);
             view.AddToRepoCombobox(XLSData.Wina);
+            view.AddToRepoCombobox(XLSData.Glass);
+            view.AddToRepoCombobox(XLSData.Survival);
+            view.AddToRepoCombobox(XLSData.Knowledge);
 
         }
         void SetSim()
