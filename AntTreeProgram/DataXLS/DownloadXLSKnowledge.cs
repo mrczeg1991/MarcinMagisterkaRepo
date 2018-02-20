@@ -19,11 +19,11 @@ namespace AntTreeProgram.DataXLS
             {
                 Points points = new Points();
                 points.StringData.Add(knowledge.UNS);
-                points.DigitData.Add(PrepareDigit(knowledge.LPR, 0.99));
-                points.DigitData.Add(PrepareDigit(knowledge.PEG, 0.99));
-                points.DigitData.Add(PrepareDigit(knowledge.SCG, 0.99));
-                points.DigitData.Add(PrepareDigit(knowledge.STG, 0.99));
-                points.DigitData.Add(PrepareDigit(knowledge.STR, 0.91));
+                points.DigitData.Add(knowledge.LPR);
+                points.DigitData.Add(knowledge.PEG);
+                points.DigitData.Add(knowledge.SCG);
+                points.DigitData.Add(knowledge.STG);
+                points.DigitData.Add(knowledge.STR);
 
                 Ant ant = new Ant(0, 0)
                 {
