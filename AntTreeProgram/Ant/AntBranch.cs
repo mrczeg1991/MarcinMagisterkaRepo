@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AntTreeProgram
 {
-    class AntBranch
+    public class AntBranch
     {
         public List<Ant> Ants { get; set; }
         public Color AntColor { get; set; }

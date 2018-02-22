@@ -36,6 +36,11 @@ namespace AntTreeProgram.DataXLS
             return antList;
         }
 
+        public object GetList()
+        {
+            return KnowledgeList;
+        }
+
         public string GetPath()
         {
             string path = @"C:\Users\Marcin\Desktop\Magisterka\Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls";

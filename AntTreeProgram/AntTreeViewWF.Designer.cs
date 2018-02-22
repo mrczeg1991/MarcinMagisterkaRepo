@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.tc_Ant = new System.Windows.Forms.TabControl();
+            this.tp_Name = new System.Windows.Forms.TabPage();
+            this.tp_Dane = new System.Windows.Forms.TabPage();
+            this.btn_Group = new System.Windows.Forms.Button();
             this.p_Sim = new System.Windows.Forms.Panel();
             this.tb_NumberGroups = new System.Windows.Forms.TextBox();
             this.lbl_dunn = new System.Windows.Forms.Label();
@@ -40,15 +42,62 @@
             this.l_dissim = new System.Windows.Forms.Label();
             this.c_sim = new System.Windows.Forms.ComboBox();
             this.l_sim = new System.Windows.Forms.Label();
-            this.btn_Group = new System.Windows.Forms.Button();
-            this.Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.button1 = new System.Windows.Forms.Button();
+            this.dg_Data = new System.Windows.Forms.DataGridView();
+            this.tc_Ant.SuspendLayout();
+            this.tp_Name.SuspendLayout();
+            this.tp_Dane.SuspendLayout();
             this.p_Sim.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_Data)).BeginInit();
             this.SuspendLayout();
+            // 
+            // tc_Ant
+            // 
+            this.tc_Ant.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tc_Ant.Controls.Add(this.tp_Name);
+            this.tc_Ant.Controls.Add(this.tp_Dane);
+            this.tc_Ant.Location = new System.Drawing.Point(2, -1);
+            this.tc_Ant.Name = "tc_Ant";
+            this.tc_Ant.SelectedIndex = 0;
+            this.tc_Ant.Size = new System.Drawing.Size(736, 423);
+            this.tc_Ant.TabIndex = 0;
+            // 
+            // tp_Name
+            // 
+            this.tp_Name.Controls.Add(this.p_Sim);
+            this.tp_Name.Location = new System.Drawing.Point(4, 22);
+            this.tp_Name.Name = "tp_Name";
+            this.tp_Name.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_Name.Size = new System.Drawing.Size(728, 397);
+            this.tp_Name.TabIndex = 0;
+            this.tp_Name.Text = "Ustawienia";
+            this.tp_Name.UseVisualStyleBackColor = true;
+            // 
+            // tp_Dane
+            // 
+            this.tp_Dane.Controls.Add(this.dg_Data);
+            this.tp_Dane.Location = new System.Drawing.Point(4, 22);
+            this.tp_Dane.Name = "tp_Dane";
+            this.tp_Dane.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_Dane.Size = new System.Drawing.Size(728, 397);
+            this.tp_Dane.TabIndex = 1;
+            this.tp_Dane.Text = "Dane";
+            this.tp_Dane.UseVisualStyleBackColor = true;
+            // 
+            // btn_Group
+            // 
+            this.btn_Group.Location = new System.Drawing.Point(14, 246);
+            this.btn_Group.Name = "btn_Group";
+            this.btn_Group.Size = new System.Drawing.Size(75, 23);
+            this.btn_Group.TabIndex = 4;
+            this.btn_Group.Text = "Grupuj";
+            this.btn_Group.UseVisualStyleBackColor = true;
+            this.btn_Group.Click += new System.EventHandler(this.btn_Group_Click_1);
             // 
             // p_Sim
             // 
+            this.p_Sim.Controls.Add(this.btn_Group);
             this.p_Sim.Controls.Add(this.tb_NumberGroups);
             this.p_Sim.Controls.Add(this.lbl_dunn);
             this.p_Sim.Controls.Add(this.cb_Repo);
@@ -58,10 +107,10 @@
             this.p_Sim.Controls.Add(this.l_dissim);
             this.p_Sim.Controls.Add(this.c_sim);
             this.p_Sim.Controls.Add(this.l_sim);
-            this.p_Sim.Location = new System.Drawing.Point(2, 2);
+            this.p_Sim.Location = new System.Drawing.Point(0, 0);
             this.p_Sim.Name = "p_Sim";
-            this.p_Sim.Size = new System.Drawing.Size(200, 374);
-            this.p_Sim.TabIndex = 1;
+            this.p_Sim.Size = new System.Drawing.Size(728, 397);
+            this.p_Sim.TabIndex = 3;
             // 
             // tb_NumberGroups
             // 
@@ -139,76 +188,53 @@
             this.l_sim.TabIndex = 0;
             this.l_sim.Text = "Podobieństwo:";
             // 
-            // btn_Group
+            // dg_Data
             // 
-            this.btn_Group.Location = new System.Drawing.Point(12, 382);
-            this.btn_Group.Name = "btn_Group";
-            this.btn_Group.Size = new System.Drawing.Size(75, 23);
-            this.btn_Group.TabIndex = 2;
-            this.btn_Group.Text = "Grupuj";
-            this.btn_Group.UseVisualStyleBackColor = true;
-            this.btn_Group.Click += new System.EventHandler(this.btn_Group_Click);
-            // 
-            // Chart
-            // 
-            this.Chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dg_Data.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.Chart.ChartAreas.Add(chartArea1);
-            this.Chart.Location = new System.Drawing.Point(208, 2);
-            this.Chart.Name = "Chart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series1.Name = "Series1";
-            this.Chart.Series.Add(series1);
-            this.Chart.Size = new System.Drawing.Size(519, 405);
-            this.Chart.TabIndex = 3;
-            this.Chart.Text = "chart1";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(93, 382);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.dg_Data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_Data.Location = new System.Drawing.Point(0, 0);
+            this.dg_Data.Name = "dg_Data";
+            this.dg_Data.Size = new System.Drawing.Size(728, 397);
+            this.dg_Data.TabIndex = 0;
             // 
             // AntTreeViewWF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(739, 419);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.Chart);
-            this.Controls.Add(this.btn_Group);
-            this.Controls.Add(this.p_Sim);
+            this.Controls.Add(this.tc_Ant);
             this.Name = "AntTreeViewWF";
             this.Text = "Ant Marcin";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.tc_Ant.ResumeLayout(false);
+            this.tp_Name.ResumeLayout(false);
+            this.tp_Dane.ResumeLayout(false);
             this.p_Sim.ResumeLayout(false);
             this.p_Sim.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Chart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_Data)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TabControl tc_Ant;
+        private System.Windows.Forms.TabPage tp_Name;
         private System.Windows.Forms.Panel p_Sim;
+        private System.Windows.Forms.Button btn_Group;
+        private System.Windows.Forms.TextBox tb_NumberGroups;
+        private System.Windows.Forms.Label lbl_dunn;
+        private System.Windows.Forms.ComboBox cb_Repo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label l_NumberGroups;
         private System.Windows.Forms.ComboBox c_dissim;
         private System.Windows.Forms.Label l_dissim;
         private System.Windows.Forms.ComboBox c_sim;
         private System.Windows.Forms.Label l_sim;
-        private System.Windows.Forms.Button btn_Group;
-        private System.Windows.Forms.Label l_NumberGroups;
-        private System.Windows.Forms.DataVisualization.Charting.Chart Chart;
-        private System.Windows.Forms.ComboBox cb_Repo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lbl_dunn;
-        private System.Windows.Forms.TextBox tb_NumberGroups;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tp_Dane;
+        private System.Windows.Forms.DataGridView dg_Data;
     }
 }
 

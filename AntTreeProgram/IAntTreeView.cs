@@ -1,4 +1,5 @@
-﻿using AntTreeProgram.DataXLS;
+﻿using AntTreeProgram.Adapters;
+using AntTreeProgram.DataXLS;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -24,5 +25,7 @@ namespace AntTreeProgram
         void SetDunnIndex(double index);
 
         int GetNumberGroups();
+
+        void AddToGrid(object iris, List<AntBranch> branches);
     }
 }

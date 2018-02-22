@@ -88,14 +88,15 @@ namespace AntTreeProgram
             view.SetGroupNumber(0);
             IDownloadXLS xls = FabrykaXLS.CreateXLSObject(view.GetRepoName());
             xls.ReadData();
-            antsList=xls.GetAntTreeList();
+            antsList = xls.GetAntTreeList();
             antsList.ForEach(a =>
             {
                 a.TDissim = GetDissim();
                 a.TSim = GetSim();
             });
             AntTree antTreeAlgorythm = new AntTree();
-            antBranches = antTreeAlgorythm.AntTreeAlgorythm(antsList);           
+            antBranches = antTreeAlgorythm.AntTreeAlgorythm(antsList);
+            view.AddToGrid(xls.GetList(), antBranches);
         }
     }
 }

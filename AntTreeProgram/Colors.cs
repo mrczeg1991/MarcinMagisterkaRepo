@@ -14,7 +14,7 @@ namespace AntTreeProgram
         {
             colors = new List<Color>()
             {
-                Color.Black,Color.Red,Color.Green,Color.Yellow,Color.Blue,Color.Pink,Color.Purple,Color.GreenYellow
+                Color.Blue,Color.Red,Color.Green,Color.Yellow,Color.Aquamarine,Color.Pink,Color.Purple,Color.GreenYellow
             };
         }
         public Color GetColor(int index)

@@ -43,6 +43,11 @@ namespace AntTreeProgram.DataXLS
             return antList;
         }
 
+        public object GetList()
+        {
+            return WineList;
+        }
+
         public string GetPath()
         {
             string path = @"C:\Users\Marcin\Desktop\Magisterka\Wine.xls";

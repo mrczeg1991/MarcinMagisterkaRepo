@@ -49,5 +49,9 @@ namespace AntTreeProgram.DataXLS
         {
             return digit / max;
         }
+        public object GetList()
+        {
+            return IrisList;
+        }
     }
 }

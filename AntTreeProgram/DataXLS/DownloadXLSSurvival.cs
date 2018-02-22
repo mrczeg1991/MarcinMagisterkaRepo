@@ -33,6 +33,11 @@ namespace AntTreeProgram.DataXLS
             return antList;
         }
 
+        public object GetList()
+        {
+            return SurvivalList;
+        }
+
         public string GetPath()
         {
             string path = @"C:\Users\Marcin\Desktop\Magisterka\Survival.xls";

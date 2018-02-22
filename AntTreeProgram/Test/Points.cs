@@ -11,6 +11,5 @@ namespace AntTreeProgram
     {
         public List<double> DigitData { get; set; } = new List<double>();
         public List<string> StringData { get; set; } = new List<string>();
-        public Color GetColor { get; set; } = Color.Green;
     }
 }

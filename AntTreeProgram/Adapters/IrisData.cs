@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AntTreeProgram.Adapters
 {
-    class IrisData
+    public class IrisData
     {
         [ExcelColumn("sepal length")]
         public double SepalLength { get; set; }

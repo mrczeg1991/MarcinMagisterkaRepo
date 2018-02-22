@@ -55,5 +55,10 @@ namespace AntTreeProgram.DataXLS
             var glassFile = new ExcelQueryFactory(GetPath());
             GlassList = (from a in glassFile.Worksheet<GlassData>(sheetName) select a).ToList();
         }
+
+        public object GetList()
+        {
+            return GlassList;
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace AntTreeProgram.DataXLS
         void ReadData();
         string GetPath();
         List<Ant> GetAntTreeList();
+        object GetList();
+
     }
 }

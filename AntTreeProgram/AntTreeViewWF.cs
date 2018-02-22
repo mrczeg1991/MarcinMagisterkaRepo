@@ -7,7 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AntTreeProgram.Adapters;
 using AntTreeProgram.DataXLS;
+using System.Threading;
+
 namespace AntTreeProgram
 {
     public partial class AntTreeViewWF : Form, IAntTreeView
@@ -26,7 +29,6 @@ namespace AntTreeProgram
         }
         public void ClearData()
         {
-            Chart.Series[0].Points.Clear();
         }
         public void AddToSimCombobox(double value)
         {
@@ -43,12 +45,6 @@ namespace AntTreeProgram
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void btn_Group_Click(object sender, EventArgs e)
-        {
-            controler.GroupData();
-            controler.SetData();
         }
         public object GetDissim()
         {
@@ -88,10 +84,32 @@ namespace AntTreeProgram
             return int.TryParse(tb_NumberGroups.Text, out number)==true?number:2;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void AddToGrid(object data, List<AntBranch> branches)
         {
-            DownloadXLSIris cdd = new DownloadXLSIris();
-            cdd.ReadData();
+            var source = new BindingSource();
+            source.DataSource = data;
+            dg_Data.DataSource = source;
+            dg_Data.DataBindingComplete +=(sender2, e2)=> Dg_Data_DataBindingComplete(sender2,e2,branches);
+            dg_Data.ReadOnly = true;
+            dg_Data.Enabled = true;
+        }
+
+        private void Dg_Data_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e, List<AntBranch> branches)
+        {
+
+            foreach (AntBranch branch in branches)
+            {
+                foreach (Ant ant in branch.Ants)
+                {
+                    DataGridViewRow row = dg_Data.Rows[ant.Number];// get you required index
+                    row.DefaultCellStyle.BackColor = branch.AntColor;
+                }
+            }
+        }
+        private void btn_Group_Click_1(object sender, EventArgs e)
+        {
+            controler.GroupData();
+            controler.SetData();
         }
     }
 }
