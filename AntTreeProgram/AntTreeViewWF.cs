@@ -89,9 +89,10 @@ namespace AntTreeProgram
             var source = new BindingSource();
             source.DataSource = data;
             dg_Data.DataSource = source;
-            dg_Data.DataBindingComplete +=(sender2, e2)=> Dg_Data_DataBindingComplete(sender2,e2,branches);
             dg_Data.ReadOnly = true;
             dg_Data.Enabled = true;
+            dg_Data.DataBindingComplete +=(sender2, e2)=> Dg_Data_DataBindingComplete(sender2,e2,branches);
+     
         }
 
         private void Dg_Data_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e, List<AntBranch> branches)

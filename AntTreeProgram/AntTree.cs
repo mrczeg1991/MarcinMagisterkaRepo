@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AntTreeProgram
@@ -18,7 +19,8 @@ namespace AntTreeProgram
         {
             List<AntBranch> antBranches = new List<AntBranch>();
             AddToBranches(antsList, antBranches);
-            //BranchesOperation(antBranches, antsList);
+            //Thread thr = new Thread(()=>BranchesOperation(antBranches, antsList));
+            //thr.Start();
             return antBranches;
         }
 
@@ -31,7 +33,7 @@ namespace AntTreeProgram
                 {
                     foreach (Ant ant in branch.Ants)
                     {
-                        if (i != 0 && ant.ParentIndex==0 && ant.ParenTemp!=0)
+                        if (i != 0 && ant.ParentIndex==0 && ant.ParentIndex!= 999999)
                         {
                             Ant apos = branch.Ants.Where(a=>a.Number==ant.ParenTemp).FirstOrDefault();
                             if (CountSim(ant, apos) >= ant.TSim)
@@ -110,7 +112,7 @@ namespace AntTreeProgram
             branch.Index = index;
             branch.AntColor = color.GetColor(index);
             firstAnt.Index = index;
-            firstAnt.ParentIndex = 0;
+            firstAnt.ParentIndex = 999999;
             branch.Ants.Add(firstAnt);
             return branch;
         }

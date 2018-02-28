@@ -37,7 +37,8 @@ namespace AntTreeProgram
                     }
                 }
             }
-            return Math.Abs((min!=0?min:0.0001)-1);
+            double score = Math.Abs((min != 0 ? min : 0.0001) - 1);
+            return score;
         }
         double TheBiggestSimilarInTheDifferenceBranchs(List<AntBranch> antBranches)
         {
@@ -66,7 +67,8 @@ namespace AntTreeProgram
                     );
                 }
             }
-            return Math.Abs((max!=0?max:0.0001)-1);
+            double score = Math.Abs((max != 0 ? max : 0.0001) - 1);
+            return score;
         }
     }
 }

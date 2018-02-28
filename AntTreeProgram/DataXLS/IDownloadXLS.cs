@@ -14,5 +14,7 @@ namespace AntTreeProgram.DataXLS
         List<Ant> GetAntTreeList();
         object GetList();
 
+        List<string> GetNameList();
+
     }
 }

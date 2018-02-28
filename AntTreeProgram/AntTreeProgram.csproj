@@ -77,6 +77,8 @@
     <Compile Include="AntTreeViewWF.Designer.cs">
       <DependentUpon>AntTreeViewWF.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckScoreTools\ClassificationError.cs" />
+    <Compile Include="CheckScoreTools\ClusterPurity.cs" />
     <Compile Include="Colors.cs" />
     <Compile Include="CheckScoreTools\DunnIndex.cs" />
     <Compile Include="DataXLS\DownloadXLSKnowledge.cs" />

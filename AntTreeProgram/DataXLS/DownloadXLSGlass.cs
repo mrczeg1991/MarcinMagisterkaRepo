@@ -11,6 +11,8 @@ namespace AntTreeProgram.DataXLS
     class DownloadXLSGlass : IDownloadXLS
     {
         public List<GlassData> GlassList { get; set; } = new List<GlassData>();
+        List<string> nameList { get; set; } = new List<string>();
+
         public List<Ant> GetAntTreeList()
         {
             List<Ant> antList = new List<Ant>();
@@ -28,6 +30,7 @@ namespace AntTreeProgram.DataXLS
                 points.DigitData.Add(PrepareDigit(glass.Ba, 3.15));
                 points.DigitData.Add(PrepareDigit(glass.Fe, 0.51));
                 points.StringData.Add(glass.Type);
+                if (!nameList.Exists(a => a == glass.Type)) nameList.Add(glass.Type);
                 Ant ant = new Ant(0, 0)
                 {
                     Number = i,
@@ -59,6 +62,11 @@ namespace AntTreeProgram.DataXLS
         public object GetList()
         {
             return GlassList;
+        }
+
+        public List<string> GetNameList()
+        {
+            return nameList;
         }
     }
 }

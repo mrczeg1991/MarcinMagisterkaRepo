@@ -11,6 +11,8 @@ namespace AntTreeProgram.DataXLS
     class DownloadXLSWine : IDownloadXLS
     {
         public List<WineData> WineList { get; set; } = new List<WineData>();
+        List<string> nameList { get; set; } = new List<string>();
+
         public List<Ant> GetAntTreeList()
         {
             List<Ant> antList = new List<Ant>();
@@ -19,6 +21,7 @@ namespace AntTreeProgram.DataXLS
             {
                 Points points = new Points();
                 points.StringData.Add(wine.Type);
+                if (!nameList.Exists(a => a == wine.Type)) nameList.Add(wine.Type);
                 points.DigitData.Add(PrepareDigit(wine.Alcohol, 14.83));
                 points.DigitData.Add(PrepareDigit(wine.MalicAcid, 5.8));
                 points.DigitData.Add(PrepareDigit(wine.Ash, 3.23));
@@ -63,6 +66,10 @@ namespace AntTreeProgram.DataXLS
         double PrepareDigit(double digit, double max)
         {
             return digit / max;
+        }
+        public List<string> GetNameList()
+        {
+            return nameList;
         }
     }
 }

@@ -11,6 +11,8 @@ namespace AntTreeProgram.DataXLS
     class DownloadXLSSurvival : IDownloadXLS
     {
         public List<SurvivalData> SurvivalList { get; set; } = new List<SurvivalData>();
+        List<string> nameList { get; set; } = new List<string>();
+
         public List<Ant> GetAntTreeList()
         {
             List<Ant> antList = new List<Ant>();
@@ -19,6 +21,7 @@ namespace AntTreeProgram.DataXLS
             {
                 Points points = new Points();
                 points.StringData.Add(wine.Survival);
+                if (!nameList.Exists(a => a == wine.Survival)) nameList.Add(wine.Survival);
                 points.DigitData.Add(PrepareDigit(wine.Age, 83));
                 points.DigitData.Add(PrepareDigit(wine.Year, 69));
                 points.DigitData.Add(PrepareDigit(wine.Number, 52));
@@ -53,6 +56,10 @@ namespace AntTreeProgram.DataXLS
         double PrepareDigit(double digit, double max)
         {
             return digit / max;
+        }
+        public List<string> GetNameList()
+        {
+            return nameList;
         }
     }
 }

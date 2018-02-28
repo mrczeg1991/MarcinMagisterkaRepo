@@ -11,6 +11,7 @@ namespace AntTreeProgram.DataXLS
     class DownloadXLSIris : IDownloadXLS
     {
         public List<IrisData> IrisList { get; set; } = new List<IrisData>();
+        List<string> nameList { get; set; } = new List<string>();
         public void ReadData()
         {
             string sheetName = "Iris";
@@ -35,6 +36,7 @@ namespace AntTreeProgram.DataXLS
                 points.DigitData.Add(PrepareDigit(iris.SepalLength,7.9));
                 points.DigitData.Add(PrepareDigit(iris.SepalWidth,4.4));
                 points.StringData.Add(iris.Iris);
+                if (!nameList.Exists(a => a == iris.Iris)) nameList.Add(iris.Iris);
                 Ant ant = new Ant(0, 0)
                 {
                     Number = i,
@@ -52,6 +54,11 @@ namespace AntTreeProgram.DataXLS
         public object GetList()
         {
             return IrisList;
+        }
+
+        public List<string> GetNameList()
+        {
+            return nameList;
         }
     }
 }

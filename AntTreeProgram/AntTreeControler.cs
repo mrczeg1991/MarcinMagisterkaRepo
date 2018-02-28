@@ -1,4 +1,5 @@
-﻿using AntTreeProgram.DataXLS;
+﻿using AntTreeProgram.CheckScoreTools;
+using AntTreeProgram.DataXLS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -97,6 +98,7 @@ namespace AntTreeProgram
             AntTree antTreeAlgorythm = new AntTree();
             antBranches = antTreeAlgorythm.AntTreeAlgorythm(antsList);
             view.AddToGrid(xls.GetList(), antBranches);
+            ClusterPurity error = new ClusterPurity(antBranches, xls.GetNameList(), xls.GetAntTreeList().Count());
         }
     }
 }

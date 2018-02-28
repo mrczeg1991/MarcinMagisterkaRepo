@@ -11,6 +11,8 @@ namespace AntTreeProgram.DataXLS
     class DownloadXLSKnowledge : IDownloadXLS
     {
         List<KnowledgeData> KnowledgeList = new List<KnowledgeData>();
+        List<string> nameList { get; set; } = new List<string>();
+
         public List<Ant> GetAntTreeList()
         {
             List<Ant> antList = new List<Ant>();
@@ -19,6 +21,7 @@ namespace AntTreeProgram.DataXLS
             {
                 Points points = new Points();
                 points.StringData.Add(knowledge.UNS);
+                if (!nameList.Exists(a => a == knowledge.UNS)) nameList.Add(knowledge.UNS);
                 points.DigitData.Add(knowledge.LPR);
                 points.DigitData.Add(knowledge.PEG);
                 points.DigitData.Add(knowledge.SCG);
@@ -56,6 +59,10 @@ namespace AntTreeProgram.DataXLS
         double PrepareDigit(double digit, double max)
         {
             return digit / max;
+        }
+        public List<string> GetNameList()
+        {
+            return nameList;
         }
     }
 }
