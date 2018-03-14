@@ -104,6 +104,7 @@ namespace AntTreeProgram
             view.SetClassificationError(Math.Round((1-purity),3).ToString());
             GDIIndex gdi = new GDIIndex();
             view.SetGDIIndex(gdi.CountGDIIndex(antBranches).ToString());
+            view.DrawBranch(antBranches[0]);
         }
     }
 }

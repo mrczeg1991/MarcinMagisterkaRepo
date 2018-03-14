@@ -19,6 +19,7 @@ namespace AntTreeProgram
         {
             List<AntBranch> antBranches = new List<AntBranch>();
             AddToBranches(antsList, antBranches);
+            BranchesOperation(antBranches, antsList);
             //Thread thr = new Thread(()=>BranchesOperation(antBranches, antsList));
             //thr.Start();
             return antBranches;

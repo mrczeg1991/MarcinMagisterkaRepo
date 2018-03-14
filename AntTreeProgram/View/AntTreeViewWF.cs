@@ -120,6 +120,13 @@ namespace AntTreeProgram
         {
             lbl_indexGDI.Text = "Indeks GDI: " + value;
         }
+        public void DrawBranch(AntBranch branch)
+        {
+            var dupaaaa = (from rekord in branch.Ants where rekord.ParentIndex == 0 select rekord).FirstOrDefault();
+            trvBaseTree.Nodes.Insert(dupaaaa.Index, tn);
+
+            var childs = branch.Ants.Where(a => a.ParentIndex == dupaaaa.Index).Select(b => b).ToList();
+        }
 
     }
 }

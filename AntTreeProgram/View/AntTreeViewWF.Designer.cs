@@ -30,7 +30,11 @@
         {
             this.tc_Ant = new System.Windows.Forms.TabControl();
             this.tp_Name = new System.Windows.Forms.TabPage();
+            this.dg_Data = new System.Windows.Forms.DataGridView();
             this.p_settings = new System.Windows.Forms.Panel();
+            this.lbl_indexGDI = new System.Windows.Forms.Label();
+            this.lbl_clusterPurity = new System.Windows.Forms.Label();
+            this.lbl_classificationError = new System.Windows.Forms.Label();
             this.btn_Group = new System.Windows.Forms.Button();
             this.lbl_dunn = new System.Windows.Forms.Label();
             this.cb_Repo = new System.Windows.Forms.ComboBox();
@@ -41,14 +45,12 @@
             this.c_sim = new System.Windows.Forms.ComboBox();
             this.l_sim = new System.Windows.Forms.Label();
             this.tp_Dane = new System.Windows.Forms.TabPage();
-            this.lbl_classificationError = new System.Windows.Forms.Label();
-            this.lbl_clusterPurity = new System.Windows.Forms.Label();
-            this.dg_Data = new System.Windows.Forms.DataGridView();
-            this.lbl_indexGDI = new System.Windows.Forms.Label();
+            this.trvBaseTree = new System.Windows.Forms.TreeView();
             this.tc_Ant.SuspendLayout();
             this.tp_Name.SuspendLayout();
-            this.p_settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_Data)).BeginInit();
+            this.p_settings.SuspendLayout();
+            this.tp_Dane.SuspendLayout();
             this.SuspendLayout();
             // 
             // tc_Ant
@@ -76,6 +78,17 @@
             this.tp_Name.Text = "Ustawienia";
             this.tp_Name.UseVisualStyleBackColor = true;
             // 
+            // dg_Data
+            // 
+            this.dg_Data.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dg_Data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_Data.Location = new System.Drawing.Point(191, 23);
+            this.dg_Data.Name = "dg_Data";
+            this.dg_Data.Size = new System.Drawing.Size(531, 368);
+            this.dg_Data.TabIndex = 12;
+            // 
             // p_settings
             // 
             this.p_settings.Controls.Add(this.lbl_indexGDI);
@@ -94,6 +107,33 @@
             this.p_settings.Name = "p_settings";
             this.p_settings.Size = new System.Drawing.Size(185, 397);
             this.p_settings.TabIndex = 3;
+            // 
+            // lbl_indexGDI
+            // 
+            this.lbl_indexGDI.AutoSize = true;
+            this.lbl_indexGDI.Location = new System.Drawing.Point(11, 190);
+            this.lbl_indexGDI.Name = "lbl_indexGDI";
+            this.lbl_indexGDI.Size = new System.Drawing.Size(64, 13);
+            this.lbl_indexGDI.TabIndex = 11;
+            this.lbl_indexGDI.Text = "Indeks GDI:";
+            // 
+            // lbl_clusterPurity
+            // 
+            this.lbl_clusterPurity.AutoSize = true;
+            this.lbl_clusterPurity.Location = new System.Drawing.Point(11, 250);
+            this.lbl_clusterPurity.Name = "lbl_clusterPurity";
+            this.lbl_clusterPurity.Size = new System.Drawing.Size(76, 13);
+            this.lbl_clusterPurity.TabIndex = 10;
+            this.lbl_clusterPurity.Text = "Czystość grup:";
+            // 
+            // lbl_classificationError
+            // 
+            this.lbl_classificationError.AutoSize = true;
+            this.lbl_classificationError.Location = new System.Drawing.Point(11, 230);
+            this.lbl_classificationError.Name = "lbl_classificationError";
+            this.lbl_classificationError.Size = new System.Drawing.Size(87, 13);
+            this.lbl_classificationError.TabIndex = 9;
+            this.lbl_classificationError.Text = "Błąd klasyfikacji:";
             // 
             // btn_Group
             // 
@@ -176,6 +216,7 @@
             // 
             // tp_Dane
             // 
+            this.tp_Dane.Controls.Add(this.trvBaseTree);
             this.tp_Dane.Location = new System.Drawing.Point(4, 22);
             this.tp_Dane.Name = "tp_Dane";
             this.tp_Dane.Padding = new System.Windows.Forms.Padding(3);
@@ -184,43 +225,12 @@
             this.tp_Dane.Text = "Dane";
             this.tp_Dane.UseVisualStyleBackColor = true;
             // 
-            // lbl_classificationError
+            // trvBaseTree
             // 
-            this.lbl_classificationError.AutoSize = true;
-            this.lbl_classificationError.Location = new System.Drawing.Point(11, 230);
-            this.lbl_classificationError.Name = "lbl_classificationError";
-            this.lbl_classificationError.Size = new System.Drawing.Size(87, 13);
-            this.lbl_classificationError.TabIndex = 9;
-            this.lbl_classificationError.Text = "Błąd klasyfikacji:";
-            // 
-            // lbl_clusterPurity
-            // 
-            this.lbl_clusterPurity.AutoSize = true;
-            this.lbl_clusterPurity.Location = new System.Drawing.Point(11, 250);
-            this.lbl_clusterPurity.Name = "lbl_clusterPurity";
-            this.lbl_clusterPurity.Size = new System.Drawing.Size(76, 13);
-            this.lbl_clusterPurity.TabIndex = 10;
-            this.lbl_clusterPurity.Text = "Czystość grup:";
-            // 
-            // dg_Data
-            // 
-            this.dg_Data.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dg_Data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_Data.Location = new System.Drawing.Point(191, 23);
-            this.dg_Data.Name = "dg_Data";
-            this.dg_Data.Size = new System.Drawing.Size(531, 368);
-            this.dg_Data.TabIndex = 12;
-            // 
-            // lbl_indexGDI
-            // 
-            this.lbl_indexGDI.AutoSize = true;
-            this.lbl_indexGDI.Location = new System.Drawing.Point(11, 190);
-            this.lbl_indexGDI.Name = "lbl_indexGDI";
-            this.lbl_indexGDI.Size = new System.Drawing.Size(64, 13);
-            this.lbl_indexGDI.TabIndex = 11;
-            this.lbl_indexGDI.Text = "Indeks GDI:";
+            this.trvBaseTree.Location = new System.Drawing.Point(0, 0);
+            this.trvBaseTree.Name = "trvBaseTree";
+            this.trvBaseTree.Size = new System.Drawing.Size(269, 397);
+            this.trvBaseTree.TabIndex = 4;
             // 
             // AntTreeViewWF
             // 
@@ -233,9 +243,10 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tc_Ant.ResumeLayout(false);
             this.tp_Name.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dg_Data)).EndInit();
             this.p_settings.ResumeLayout(false);
             this.p_settings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dg_Data)).EndInit();
+            this.tp_Dane.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -259,6 +270,7 @@
         private System.Windows.Forms.Label lbl_clusterPurity;
         private System.Windows.Forms.DataGridView dg_Data;
         private System.Windows.Forms.Label lbl_indexGDI;
+        private System.Windows.Forms.TreeView trvBaseTree;
     }
 }
 

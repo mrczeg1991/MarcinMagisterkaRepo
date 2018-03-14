@@ -9,24 +9,29 @@ namespace AntTreeProgram.CheckScoreTools
     class GDIIndex
     {
         public double GDIIndexValue { get; set; }
+        public DunnIndex Dunn { get; set; } = new DunnIndex();
         AntTree antTree = new AntTree();
         public double CountGDIIndex(List<AntBranch> antBranches)
         {
             List<double> antsSim = new List<double>();
-            foreach(AntBranch branch in antBranches)
+            List<double> antsSimInBranch = new List<double>();
+            foreach (AntBranch branch in antBranches)
             {
-                foreach(Ant ant in branch.Ants)
+                double simInBranch = 0;
+                Dictionary<int, double> tempSim = new Dictionary<int, double>();
+                foreach (AntBranch branchTemp in antBranches.Where(d => d.Index != branch.Index))
                 {
-                    foreach (Ant antTemp in branch.Ants.Where(a => a.Number != ant.Number))
+                    tempSim.Add(branchTemp.Index, 0);
+                }
+                foreach (Ant ant in branch.Ants)
+                {
+                    foreach (AntBranch branchTemp in antBranches.Where(d => d.Index == branch.Index))
                     {
-                        double tempSim = antTree.CountSim(ant, antTemp);
-                        if (tempSim < min)
+                        foreach (Ant antTemp in branchTemp.Ants)
                         {
-                            min = tempSim;
-                            number = ant.Number;
-                            numbertemp = antTemp.Number;
-                            group = branch.Index;
+                            simInBranch = Math.Abs(simInBranch + antTree.CountSim(antTemp, ant));
                         }
+                        simInBranch = simInBranch / (branchTemp.Ants.Count + branch.Ants.Count);
                     }
                     foreach (AntBranch branchTemp in antBranches.Where(d=>d.Index!=branch.Index))
                     {
@@ -35,12 +40,13 @@ namespace AntTreeProgram.CheckScoreTools
                         {
                            sim=Math.Abs(sim + antTree.CountSim(antTemp, ant));
                         }
-                        sim = sim / (branchTemp.Ants.Count + branch.Ants.Count);
-                        antsSim.Add(sim);
+                        tempSim[branchTemp.Index] = sim / (branchTemp.Ants.Count + branch.Ants.Count);
                     }
                 }
+                antsSim.AddRange(tempSim.Select(a => a.Value));
+                antsSimInBranch.Add(simInBranch);
             }
-            double score=Math.Round(antsSim.Max() / dunn.TheBiggestDifferenceInTheBranch(antBranches),3);
+            double score=Math.Round(antsSim.Max() / antsSimInBranch.Min(), 3);
             return score;
         }
     }

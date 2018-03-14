@@ -30,5 +30,6 @@ namespace AntTreeProgram
         void SetClassificationError(string value);
         void SetErrorPurity(string value);
         void SetGDIIndex(string value);
+        void DrawBranch(AntBranch branch);
     }
 }
