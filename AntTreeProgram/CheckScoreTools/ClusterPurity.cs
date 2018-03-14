@@ -7,23 +7,17 @@ using System.Threading.Tasks;
 namespace AntTreeProgram.CheckScoreTools
 {
     class ClusterPurity
-    {
-        List<AntBranch> antBranches;
-        public int Score { get; set; }
-        public ClusterPurity(List<AntBranch> antBranches, List<string> nameList, int numberAnts)
+    {    
+        public double Operation(List<AntBranch> antBranches, List<string> nameList, int numberAnts)
         {
-            Operation(antBranches, nameList, numberAnts);
-        }
-        void Operation(List<AntBranch> antBranches, List<string> nameList, int numberAnts)
-        {
-            int temp = 0;
+            double temp = 0;
             foreach(string name in nameList)
             {
-                var dd = antBranches.Select(a => a.Ants.Select(b => b.Points.StringData[0]).Where(d => d == name).Count()).ToList();
+                var test = antBranches.Select(a => a.Ants.Select(b => b.Points.StringData[0]).Where(d => d == name).Count()).ToList().Max();
                 temp =temp+antBranches.Select(a => a.Ants.Select(b => b.Points.StringData[0]).Where(d => d ==name).Count()).ToList().Max();
             }
-            var ds = antBranches.Select(a => a.Ants.Select(b=>b)).ToList();
-            Score = temp / numberAnts;
+            double score = temp / numberAnts;
+            return Math.Round(score,3);
         }
     }
 }

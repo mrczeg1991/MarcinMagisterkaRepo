@@ -75,15 +75,8 @@ namespace AntTreeProgram
 
         public void SetDunnIndex(double index)
         {
-            lbl_dunn.Text = $"Dunn index:{index}";
+            lbl_dunn.Text = $"Indeks Duna:{index}";
         }
-
-        public int GetNumberGroups()
-        {
-            int number = 0;
-            return int.TryParse(tb_NumberGroups.Text, out number)==true?number:2;
-        }
-
         public void AddToGrid(object data, List<AntBranch> branches)
         {
             var source = new BindingSource();
@@ -112,5 +105,21 @@ namespace AntTreeProgram
             controler.GroupData();
             controler.SetData();
         }
+
+        public void SetClassificationError(string value)
+        {
+            lbl_classificationError.Text = "Błąd klasyfikacji:" + value;
+        }
+
+        public void SetErrorPurity(string value)
+        {
+            lbl_clusterPurity.Text = "Czystość grup:" + value;
+        }
+
+        public void SetGDIIndex(string value)
+        {
+            lbl_indexGDI.Text = "Indeks GDI: " + value;
+        }
+
     }
 }

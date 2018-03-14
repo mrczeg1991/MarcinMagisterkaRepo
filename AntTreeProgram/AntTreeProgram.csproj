@@ -62,39 +62,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\GlassData.cs" />
-    <Compile Include="Adapters\IrisData.cs" />
-    <Compile Include="Adapters\KnowledgeData.cs" />
-    <Compile Include="Adapters\SurvivalData.cs" />
-    <Compile Include="Adapters\WineData.cs" />
+    <Compile Include="CheckScoreTools\GDIIndex.cs" />
+    <Compile Include="Data\GlassData.cs" />
+    <Compile Include="Data\IrisData.cs" />
+    <Compile Include="Data\KnowledgeData.cs" />
+    <Compile Include="Data\SurvivalData.cs" />
+    <Compile Include="Data\WineData.cs" />
     <Compile Include="Ant\Ant.cs" />
     <Compile Include="Ant\AntBranch.cs" />
-    <Compile Include="AntTree.cs" />
-    <Compile Include="AntTreeControler.cs" />
-    <Compile Include="AntTreeViewWF.cs">
+    <Compile Include="AntTree\AntTree.cs" />
+    <Compile Include="Presenter\AntTreePresenter.cs" />
+    <Compile Include="View\AntTreeViewWF.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AntTreeViewWF.Designer.cs">
+    <Compile Include="View\AntTreeViewWF.Designer.cs">
       <DependentUpon>AntTreeViewWF.cs</DependentUpon>
     </Compile>
     <Compile Include="CheckScoreTools\ClassificationError.cs" />
     <Compile Include="CheckScoreTools\ClusterPurity.cs" />
-    <Compile Include="Colors.cs" />
+    <Compile Include="Other\Colors.cs" />
     <Compile Include="CheckScoreTools\DunnIndex.cs" />
-    <Compile Include="DataXLS\DownloadXLSKnowledge.cs" />
-    <Compile Include="DataXLS\DownloadXLSGlass.cs" />
-    <Compile Include="DataXLS\DownloadXLSIris.cs" />
-    <Compile Include="DataXLS\DownloadXLSSurvival.cs" />
-    <Compile Include="DataXLS\DownloadXLSWine.cs" />
-    <Compile Include="DataXLS\FabrykaXLS.cs" />
-    <Compile Include="DataXLS\IDownloadXLS.cs" />
-    <Compile Include="IAntTreeView.cs" />
-    <Compile Include="Test\Kmeans.cs" />
-    <Compile Include="Test\Points.cs" />
-    <Compile Include="Test\PrepareData.cs" />
+    <Compile Include="Adapters\DownloadXLSKnowledge.cs" />
+    <Compile Include="Adapters\DownloadXLSGlass.cs" />
+    <Compile Include="Adapters\DownloadXLSIris.cs" />
+    <Compile Include="Adapters\DownloadXLSSurvival.cs" />
+    <Compile Include="Adapters\DownloadXLSWine.cs" />
+    <Compile Include="Adapters\FabrykaXLS.cs" />
+    <Compile Include="Adapters\IDownloadXLS.cs" />
+    <Compile Include="View\IAntTreeView.cs" />
+    <Compile Include="Other\Points.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AntTreeViewWF.resx">
+    <EmbeddedResource Include="View\AntTreeViewWF.resx">
       <DependentUpon>AntTreeViewWF.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -123,5 +122,6 @@
   <ItemGroup>
     <Content Include="ReleaseNotes.css" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

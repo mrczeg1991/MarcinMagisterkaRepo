@@ -49,7 +49,7 @@ namespace AntTreeProgram
         {
             List<double> values = new List<double>()
             {
-                0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.5,0.6,0.7,0.8,0.9
+                0.005,0.01,0.05,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.85,0.9,0.95,0.98,0.99
             };
             foreach (double d in values)
             {
@@ -98,7 +98,12 @@ namespace AntTreeProgram
             AntTree antTreeAlgorythm = new AntTree();
             antBranches = antTreeAlgorythm.AntTreeAlgorythm(antsList);
             view.AddToGrid(xls.GetList(), antBranches);
-            ClusterPurity error = new ClusterPurity(antBranches, xls.GetNameList(), xls.GetAntTreeList().Count());
+            ClusterPurity error = new ClusterPurity();
+            double purity = error.Operation(antBranches, xls.GetNameList(), xls.GetAntTreeList().Count());
+            view.SetErrorPurity(purity.ToString());
+            view.SetClassificationError(Math.Round((1-purity),3).ToString());
+            GDIIndex gdi = new GDIIndex();
+            view.SetGDIIndex(gdi.CountGDIIndex(antBranches).ToString());
         }
     }
 }

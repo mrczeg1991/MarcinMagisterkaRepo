@@ -24,8 +24,11 @@ namespace AntTreeProgram
 
         void SetDunnIndex(double index);
 
-        int GetNumberGroups();
 
         void AddToGrid(object iris, List<AntBranch> branches);
+
+        void SetClassificationError(string value);
+        void SetErrorPurity(string value);
+        void SetGDIIndex(string value);
     }
 }
