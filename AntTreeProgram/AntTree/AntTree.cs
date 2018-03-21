@@ -19,7 +19,7 @@ namespace AntTreeProgram
         {
             List<AntBranch> antBranches = new List<AntBranch>();
             AddToBranches(antsList, antBranches);
-            BranchesOperation(antBranches, antsList);
+            //BranchesOperation(antBranches, antsList);
             //Thread thr = new Thread(()=>BranchesOperation(antBranches, antsList));
             //thr.Start();
             return antBranches;
@@ -77,7 +77,7 @@ namespace AntTreeProgram
         bool CheckWeatherAllAntsHaveParents(List<Ant> ants, int numberBranches)
         {
             int antsWithParents = ants.Where(a => a.ParentIndex != 0).Count();
-            return antsWithParents == ants.Count-numberBranches;
+            return antsWithParents >= ants.Count-numberBranches;
 
         }
         bool CheckWeatherAntNotExistInBranches(Ant ant, List<AntBranch> antBranches)
@@ -90,18 +90,15 @@ namespace AntTreeProgram
         {
             while (CheckWeatherAllAntsAreInBranches(antsList.Count, antBranches))
             {
-                foreach (Ant ant in antsList)
+                foreach (Ant ant in antsList.Where(a=>a.Index==0))
                 {
-                    if (CheckWeatherAntNotExistInBranches(ant,antBranches))
+                    if (antBranches.Count == 0)
                     {
-                        if (antBranches.Count == 0)
-                        {
-                            antBranches.Add(CreateNewBranch(ant, 0));
-                        }
-                        else
-                        {
-                            Support(ant, antBranches);
-                        }
+                        antBranches.Add(CreateNewBranch(ant, 1));
+                    }
+                    else
+                    {
+                        Support(ant, antBranches);
                     }
                 }
             }
@@ -119,8 +116,7 @@ namespace AntTreeProgram
         }
         void Support(Ant ant, List<AntBranch> antBranches)
         {
-            List<Ant> antFromSupport = (from rekord in antBranches  select rekord.Ants[0]).ToList();
-            Ant theMostSimilar=FindTheMostSimilarAnt(ant, antFromSupport);
+            Ant theMostSimilar=FindTheMostSimilarAntInBranches(ant, antBranches);
             double tempSim = CountSim(ant, theMostSimilar);
             if (tempSim>=ant.TSim)
             {
@@ -130,7 +126,7 @@ namespace AntTreeProgram
             }
             else
             {
-                if (tempSim<= ant.TDissim)
+                if (tempSim< ant.TDissim)
                 {
                     antBranches.Add(CreateNewBranch(ant, antBranches.Count()));
                 }
@@ -153,7 +149,7 @@ namespace AntTreeProgram
                 double temp = CountDigitData(ant.Points.DigitData, antSupport.Points.DigitData) 
                     + CountStringData(ant.Points.StringData, antSupport.Points.StringData);
                 double sqrt = Math.Sqrt(temp / (ant.Points.DigitData.Count + ant.Points.StringData.Count));
-                score = 1 - sqrt;
+                score = 1-sqrt;
             }
             return Math.Abs(score);
         }
@@ -189,7 +185,19 @@ namespace AntTreeProgram
                 double scoreTemp = CountSim(ant, antTemp);
                 if (scoreTemp > min) minAnt = antTemp;
             }
-            return minAnt ?? null;
+            return minAnt;
+        }
+        Ant FindTheMostSimilarAntInBranches(Ant ant, List<AntBranch> antBranches)
+        {
+            Ant minAnt = null;
+            double min = double.MinValue;
+            foreach (AntBranch branch in antBranches)
+            {
+                Ant antTemp=branch.Ants.Where(a=>branch.Index==a.Index).FirstOrDefault();
+                double scoreTemp = CountSim(ant, antTemp);
+                if (scoreTemp > min) minAnt = antTemp;
+            }
+            return minAnt;
         }
     }
 }

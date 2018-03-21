@@ -3,6 +3,7 @@ using LinqToExcel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,28 +14,29 @@ namespace AntTreeProgram.DataXLS
         public List<WineData> WineList { get; set; } = new List<WineData>();
         List<string> nameList { get; set; } = new List<string>();
 
+        PrepareData prepareData = new PrepareData();
         public List<Ant> GetAntTreeList()
         {
             List<Ant> antList = new List<Ant>();
-            int i = 0;
-            foreach (WineData wine in WineList)
+            int i = 1;
+            foreach (WineData wine in WineList.Where(a=>a.Alcohol>0))
             {
                 Points points = new Points();
-                points.StringData.Add(wine.Type);
+                //points.StringData.Add(wine.Type);
                 if (!nameList.Exists(a => a == wine.Type)) nameList.Add(wine.Type);
-                points.DigitData.Add(PrepareDigit(wine.Alcohol, 14.83));
-                points.DigitData.Add(PrepareDigit(wine.MalicAcid, 5.8));
-                points.DigitData.Add(PrepareDigit(wine.Ash, 3.23));
-                points.DigitData.Add(PrepareDigit(wine.AshAlcalinity, 30));
-                points.DigitData.Add(PrepareDigit(wine.Magnesium, 162));
-                points.DigitData.Add(PrepareDigit(wine.Total_Phenols, 3.88));
-                points.DigitData.Add(PrepareDigit(wine.Flavanoids, 5.08));
-                points.DigitData.Add(PrepareDigit(wine.Nonflavanoid_Phenols, 0.66));
-                points.DigitData.Add(PrepareDigit(wine.Proanthocyanins, 3.58));
-                points.DigitData.Add(PrepareDigit(wine.ColorIntensity, 13));
-                points.DigitData.Add(PrepareDigit(wine.Hue, 1.71));
-                points.DigitData.Add(PrepareDigit(wine.OD280_OD315, 4));
-                points.DigitData.Add(PrepareDigit(wine.Proline, 1680));
+                points.DigitData.Add(prepareData.RescaleData(wine.Alcohol, "Alcohol"));
+                points.DigitData.Add(prepareData.RescaleData(wine.MalicAcid, "MalicAcid"));
+                points.DigitData.Add(prepareData.RescaleData(wine.Ash, "Ash"));
+                points.DigitData.Add(prepareData.RescaleData(wine.AshAlcalinity, "AshAlcalinity"));
+                points.DigitData.Add(prepareData.RescaleData(wine.Magnesium, "Magnesium"));
+                points.DigitData.Add(prepareData.RescaleData(wine.Total_Phenols, "Total_Phenols"));
+                points.DigitData.Add(prepareData.RescaleData(wine.Flavanoids, "Flavanoids"));
+                points.DigitData.Add(prepareData.RescaleData(wine.Nonflavanoid_Phenols, "Nonflavanoid_Phenols"));
+                points.DigitData.Add(prepareData.RescaleData(wine.Proanthocyanins, "Proanthocyanins"));
+                points.DigitData.Add(prepareData.RescaleData(wine.ColorIntensity, "ColorIntensity"));
+                points.DigitData.Add(prepareData.RescaleData(wine.Hue, "Hue"));
+                points.DigitData.Add(prepareData.RescaleData(wine.OD280_OD315, "OD280_OD315"));
+                points.DigitData.Add(prepareData.RescaleData(wine.Proline, "Proline"));
                 Ant ant = new Ant(0, 0)
                 {
                     Number = i,
@@ -45,7 +47,7 @@ namespace AntTreeProgram.DataXLS
             }
             return antList;
         }
-
+    
         public object GetList()
         {
             return WineList;
@@ -62,6 +64,8 @@ namespace AntTreeProgram.DataXLS
             string sheetName = "Data";
             var wineFile = new ExcelQueryFactory(GetPath());
             WineList = (from wineXLS in wineFile.Worksheet<WineData>(sheetName) select wineXLS).ToList();
+            WineData data = new WineData();
+            prepareData.AddToDicionary(data, WineList);
         }
         double PrepareDigit(double digit, double max)
         {

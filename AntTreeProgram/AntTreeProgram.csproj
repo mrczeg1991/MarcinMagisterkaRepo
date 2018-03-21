@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\PrepareData.cs" />
     <Compile Include="CheckScoreTools\GDIIndex.cs" />
     <Compile Include="Data\GlassData.cs" />
     <Compile Include="Data\IrisData.cs" />

@@ -46,6 +46,7 @@
             this.l_sim = new System.Windows.Forms.Label();
             this.tp_Dane = new System.Windows.Forms.TabPage();
             this.trvBaseTree = new System.Windows.Forms.TreeView();
+            this.cb_Branches = new System.Windows.Forms.ComboBox();
             this.tc_Ant.SuspendLayout();
             this.tp_Name.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_Data)).BeginInit();
@@ -216,6 +217,7 @@
             // 
             // tp_Dane
             // 
+            this.tp_Dane.Controls.Add(this.cb_Branches);
             this.tp_Dane.Controls.Add(this.trvBaseTree);
             this.tp_Dane.Location = new System.Drawing.Point(4, 22);
             this.tp_Dane.Name = "tp_Dane";
@@ -227,10 +229,22 @@
             // 
             // trvBaseTree
             // 
-            this.trvBaseTree.Location = new System.Drawing.Point(0, 0);
+            this.trvBaseTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.trvBaseTree.Location = new System.Drawing.Point(0, 39);
             this.trvBaseTree.Name = "trvBaseTree";
-            this.trvBaseTree.Size = new System.Drawing.Size(269, 397);
+            this.trvBaseTree.Size = new System.Drawing.Size(732, 358);
             this.trvBaseTree.TabIndex = 4;
+            // 
+            // cb_Branches
+            // 
+            this.cb_Branches.FormattingEnabled = true;
+            this.cb_Branches.Location = new System.Drawing.Point(6, 12);
+            this.cb_Branches.Name = "cb_Branches";
+            this.cb_Branches.Size = new System.Drawing.Size(121, 21);
+            this.cb_Branches.TabIndex = 5;
+            this.cb_Branches.SelectedIndexChanged += new System.EventHandler(this.cb_Branches_SelectedIndexChanged);
             // 
             // AntTreeViewWF
             // 
@@ -271,6 +285,7 @@
         private System.Windows.Forms.DataGridView dg_Data;
         private System.Windows.Forms.Label lbl_indexGDI;
         private System.Windows.Forms.TreeView trvBaseTree;
+        private System.Windows.Forms.ComboBox cb_Branches;
     }
 }
 

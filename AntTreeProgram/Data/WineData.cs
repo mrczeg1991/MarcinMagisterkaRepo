@@ -38,5 +38,6 @@ namespace AntTreeProgram.Adapters
         [ExcelColumn("Proline")]
         public double Proline{ get; set; }
 
+        public double dddd = 0;
     }
 }

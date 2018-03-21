@@ -16,7 +16,7 @@ namespace AntTreeProgram.DataXLS
         public List<Ant> GetAntTreeList()
         {
             List<Ant> antList = new List<Ant>();
-            int i = 0;
+            int i = 1;
             foreach (SurvivalData wine in SurvivalList)
             {
                 Points points = new Points();

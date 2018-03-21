@@ -46,7 +46,7 @@ namespace AntTreeProgram.CheckScoreTools
                 antsSim.AddRange(tempSim.Select(a => a.Value));
                 antsSimInBranch.Add(simInBranch);
             }
-            double score=Math.Round(antsSim.Max() / antsSimInBranch.Min(), 3);
+            double score=Math.Round(antsSim.Min() / antsSimInBranch.Max(), 3);
             return score;
         }
     }

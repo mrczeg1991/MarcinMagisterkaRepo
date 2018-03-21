@@ -98,13 +98,18 @@ namespace AntTreeProgram
             AntTree antTreeAlgorythm = new AntTree();
             antBranches = antTreeAlgorythm.AntTreeAlgorythm(antsList);
             view.AddToGrid(xls.GetList(), antBranches);
-            ClusterPurity error = new ClusterPurity();
-            double purity = error.Operation(antBranches, xls.GetNameList(), xls.GetAntTreeList().Count());
-            view.SetErrorPurity(purity.ToString());
-            view.SetClassificationError(Math.Round((1-purity),3).ToString());
+            //ClusterPurity error = new ClusterPurity();
+            //double purity = error.Operation(antBranches, xls.GetNameList(), xls.GetAntTreeList().Count());
+            //view.SetErrorPurity(purity.ToString());
+            //view.SetClassificationError(Math.Round((1-purity),3).ToString());
             GDIIndex gdi = new GDIIndex();
-            view.SetGDIIndex(gdi.CountGDIIndex(antBranches).ToString());
-            view.DrawBranch(antBranches[0]);
+            //view.SetGDIIndex(gdi.CountGDIIndex(antBranches).ToString());
+            view.ClearBranchesCombobox();
+            antBranches.ForEach(a=>view.AddToBranchesCombobox($"Gałąź {a.Index}"));
+        }
+        public void ShowBranch(int index)
+        {
+            view.DrawBranch(antBranches.Where(a=>a.Index==index).FirstOrDefault(), $"Gałąź {index}");
         }
     }
 }

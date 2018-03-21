@@ -12,11 +12,14 @@ namespace AntTreeProgram.DataXLS
     {
         public List<IrisData> IrisList { get; set; } = new List<IrisData>();
         List<string> nameList { get; set; } = new List<string>();
+        PrepareData prepareData = new PrepareData();
         public void ReadData()
         {
             string sheetName = "Iris";
             var irisFile = new ExcelQueryFactory(GetPath());
             IrisList = (from a in irisFile.Worksheet<IrisData>(sheetName) select a).ToList();
+            IrisData data = new IrisData();
+            prepareData.AddToDicionary(data, IrisList);
         }
         public string GetPath()
         {
@@ -27,15 +30,14 @@ namespace AntTreeProgram.DataXLS
         public List<Ant> GetAntTreeList()
         {
             List<Ant> antList = new List<Ant>();
-            int i = 0;
+            int i = 1;
             foreach(IrisData iris in IrisList)
             {
                 Points points = new Points();
-                points.DigitData.Add(PrepareDigit(iris.PetalLength,6.9));
-                points.DigitData.Add(PrepareDigit(iris.PetalWidth,2.5));
-                points.DigitData.Add(PrepareDigit(iris.SepalLength,7.9));
-                points.DigitData.Add(PrepareDigit(iris.SepalWidth,4.4));
-                points.StringData.Add(iris.Iris);
+                points.DigitData.Add(prepareData.RescaleData(iris.PetalLength, "PetalLength"));
+                points.DigitData.Add(prepareData.RescaleData(iris.PetalWidth, "PetalWidth"));
+                points.DigitData.Add(prepareData.RescaleData(iris.SepalLength, "SepalLength"));
+                points.DigitData.Add(prepareData.RescaleData(iris.SepalWidth, "SepalWidth"));
                 if (!nameList.Exists(a => a == iris.Iris)) nameList.Add(iris.Iris);
                 Ant ant = new Ant(0, 0)
                 {

@@ -12,24 +12,24 @@ namespace AntTreeProgram.DataXLS
     {
         public List<GlassData> GlassList { get; set; } = new List<GlassData>();
         List<string> nameList { get; set; } = new List<string>();
-
+        PrepareData prepareData = new PrepareData();
         public List<Ant> GetAntTreeList()
         {
             List<Ant> antList = new List<Ant>();
-            int i = 0;
+            int i = 1;
             foreach (GlassData glass in GlassList)
             {
                 Points points = new Points();
-                points.DigitData.Add(PrepareDigit(glass.RI,1.53));
-                points.DigitData.Add(PrepareDigit(glass.Na,17.38));
-                points.DigitData.Add(PrepareDigit(glass.Mg,4.49));
-                points.DigitData.Add(PrepareDigit(glass.Al,3.5));
-                points.DigitData.Add(PrepareDigit(glass.Si, 75.41));
-                points.DigitData.Add(PrepareDigit(glass.K, 6.21));
-                points.DigitData.Add(PrepareDigit(glass.Ca, 16.19));
-                points.DigitData.Add(PrepareDigit(glass.Ba, 3.15));
-                points.DigitData.Add(PrepareDigit(glass.Fe, 0.51));
-                points.StringData.Add(glass.Type);
+                points.DigitData.Add(prepareData.RescaleData(glass.RI, "RI"));
+                points.DigitData.Add(prepareData.RescaleData(glass.Na, "Na"));
+                points.DigitData.Add(prepareData.RescaleData(glass.Mg, "Mg"));
+                points.DigitData.Add(prepareData.RescaleData(glass.Al, "Al"));
+                points.DigitData.Add(prepareData.RescaleData(glass.Si, "Si"));
+                points.DigitData.Add(prepareData.RescaleData(glass.K, "K"));
+                points.DigitData.Add(prepareData.RescaleData(glass.Ca, "Ca"));
+                points.DigitData.Add(prepareData.RescaleData(glass.Ba, "Ba"));
+                points.DigitData.Add(prepareData.RescaleData(glass.Fe, "Fe"));
+               // points.StringData.Add(glass.Type);
                 if (!nameList.Exists(a => a == glass.Type)) nameList.Add(glass.Type);
                 Ant ant = new Ant(0, 0)
                 {
@@ -57,6 +57,8 @@ namespace AntTreeProgram.DataXLS
             string sheetName = "Glass";
             var glassFile = new ExcelQueryFactory(GetPath());
             GlassList = (from a in glassFile.Worksheet<GlassData>(sheetName) select a).ToList();
+            GlassData glass = new GlassData();
+            prepareData.AddToDicionary(glass, GlassList);
         }
 
         public object GetList()

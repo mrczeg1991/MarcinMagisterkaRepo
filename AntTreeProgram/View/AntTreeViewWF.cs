@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using AntTreeProgram.Adapters;
 using AntTreeProgram.DataXLS;
 using System.Threading;
+using System.Drawing.Drawing2D;
+using System.Collections;
 
 namespace AntTreeProgram
 {
@@ -80,22 +82,21 @@ namespace AntTreeProgram
         public void AddToGrid(object data, List<AntBranch> branches)
         {
             var source = new BindingSource();
+            dg_Data.DataBindingComplete += (sender2, e2) => Dg_Data_DataBindingComplete(sender2, e2, branches);
             source.DataSource = data;
             dg_Data.DataSource = source;
             dg_Data.ReadOnly = true;
             dg_Data.Enabled = true;
-            dg_Data.DataBindingComplete +=(sender2, e2)=> Dg_Data_DataBindingComplete(sender2,e2,branches);
      
         }
 
         private void Dg_Data_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e, List<AntBranch> branches)
         {
-
             foreach (AntBranch branch in branches)
             {
                 foreach (Ant ant in branch.Ants)
                 {
-                    DataGridViewRow row = dg_Data.Rows[ant.Number];// get you required index
+                    DataGridViewRow row = dg_Data.Rows[ant.Number-1];// get you required index
                     row.DefaultCellStyle.BackColor = branch.AntColor;
                 }
             }
@@ -120,13 +121,47 @@ namespace AntTreeProgram
         {
             lbl_indexGDI.Text = "Indeks GDI: " + value;
         }
-        public void DrawBranch(AntBranch branch)
+        TreeNode tn = null;
+        public void DrawBranch(AntBranch branch, string name)
         {
-            var dupaaaa = (from rekord in branch.Ants where rekord.ParentIndex == 0 select rekord).FirstOrDefault();
-            trvBaseTree.Nodes.Insert(dupaaaa.Index, tn);
+            if (branch != null)
+            {
+                trvBaseTree.Nodes.Clear();
+                Ant parent = (from rekord in branch.Ants where rekord.ParentIndex == 999999 select rekord).FirstOrDefault();
+                tn = new TreeNode(name);
+                tn.Nodes.Add(parent.Number.ToString());
+                AddToPaint(parent, branch, tn);
+                trvBaseTree.Nodes.Insert(0, tn);
+                trvBaseTree.ExpandAll();
+            }
 
-            var childs = branch.Ants.Where(a => a.ParentIndex == dupaaaa.Index).Select(b => b).ToList();
+        }
+        void AddToPaint(Ant parent, AntBranch branch, TreeNode tn)
+        {
+
+            List<Ant> childs = branch.Ants.Where(a => a.ParentIndex == parent.Number).Select(b => b).ToList();
+            //childs.Add(new Ant(11, 11) { Number = 1991 , ParentIndex=parent.Number});
+            foreach (Ant ant in childs)
+            {
+                TreeNode node = tn.Nodes.Cast<TreeNode>()
+                                .Where(r => r.Text == parent.Number.ToString()).FirstOrDefault();
+                node.Nodes.Add(ant.Number.ToString());
+                AddToPaint(ant, branch, node);
+            }
         }
 
+        public void AddToBranchesCombobox(string name)
+        {
+            cb_Branches.Items.Add(name);
+        }
+
+        private void cb_Branches_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            controler.ShowBranch(cb_Branches.SelectedIndex);
+        }
+        public void ClearBranchesCombobox()
+        {
+            cb_Branches.Items.Clear();
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace AntTreeProgram.DataXLS
         public List<Ant> GetAntTreeList()
         {
             List<Ant> antList = new List<Ant>();
-            int i = 0;
+            int i = 1;
             foreach (KnowledgeData knowledge in KnowledgeList)
             {
                 Points points = new Points();
