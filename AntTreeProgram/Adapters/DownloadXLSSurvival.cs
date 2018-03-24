@@ -12,19 +12,20 @@ namespace AntTreeProgram.DataXLS
     {
         public List<SurvivalData> SurvivalList { get; set; } = new List<SurvivalData>();
         List<string> nameList { get; set; } = new List<string>();
+        PrepareData prepareDate = new PrepareData();
 
         public List<Ant> GetAntTreeList()
         {
             List<Ant> antList = new List<Ant>();
             int i = 1;
-            foreach (SurvivalData wine in SurvivalList)
+            foreach (SurvivalData survival in SurvivalList)
             {
                 Points points = new Points();
-                points.StringData.Add(wine.Survival);
-                if (!nameList.Exists(a => a == wine.Survival)) nameList.Add(wine.Survival);
-                points.DigitData.Add(PrepareDigit(wine.Age, 83));
-                points.DigitData.Add(PrepareDigit(wine.Year, 69));
-                points.DigitData.Add(PrepareDigit(wine.Number, 52));
+                points.StringData.Add(survival.Survival);
+                if (!nameList.Exists(a => a == survival.Survival)) nameList.Add(survival.Survival);
+                points.DigitData.Add(prepareDate.RescaleData(survival.Age, "Age"));
+                points.DigitData.Add(prepareDate.RescaleData(survival.Year,"Year"));
+                points.DigitData.Add(prepareDate.RescaleData(survival.Number, "Number"));
                 Ant ant = new Ant(0, 0)
                 {
                     Number = i,
@@ -52,6 +53,8 @@ namespace AntTreeProgram.DataXLS
             string sheetName = "Survival";
             var survivalFile = new ExcelQueryFactory(GetPath());
             SurvivalList = (from survivalXLS in survivalFile.Worksheet<SurvivalData>(sheetName) select survivalXLS).ToList();
+            SurvivalData survival = new SurvivalData();
+            prepareDate.AddToDicionary(survival, SurvivalList);
         }
         double PrepareDigit(double digit, double max)
         {

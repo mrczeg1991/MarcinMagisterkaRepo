@@ -29,7 +29,7 @@ namespace AntTreeProgram.DataXLS
                 points.DigitData.Add(prepareData.RescaleData(glass.Ca, "Ca"));
                 points.DigitData.Add(prepareData.RescaleData(glass.Ba, "Ba"));
                 points.DigitData.Add(prepareData.RescaleData(glass.Fe, "Fe"));
-               // points.StringData.Add(glass.Type);
+                points.StringData.Add(glass.Type);
                 if (!nameList.Exists(a => a == glass.Type)) nameList.Add(glass.Type);
                 Ant ant = new Ant(0, 0)
                 {

@@ -15,11 +15,11 @@ namespace AntTreeProgram
         {
             color = new Colors();
         }
-        public List<AntBranch> AntTreeAlgorythm(List<Ant> antsList)
+        public List<AntBranch> AntTreeAlgorythm(List<Ant> antsList, bool branchOperation)
         {
             List<AntBranch> antBranches = new List<AntBranch>();
             AddToBranches(antsList, antBranches);
-            //BranchesOperation(antBranches, antsList);
+            if(branchOperation) BranchesOperation(antBranches, antsList);
             //Thread thr = new Thread(()=>BranchesOperation(antBranches, antsList));
             //thr.Start();
             return antBranches;
@@ -32,32 +32,31 @@ namespace AntTreeProgram
             {
                 foreach (AntBranch branch in antBranches)
                 {
-                    foreach (Ant ant in branch.Ants)
+                    foreach (Ant ant in branch.Ants.Where(a=>a.ParentIndex==0 && a.ParentIndex != 999999))
                     {
-                        if (i != 0 && ant.ParentIndex==0 && ant.ParentIndex!= 999999)
+                        
+                        Ant apos = branch.Ants.Where(a=>a.Number==ant.ParenTemp).FirstOrDefault();
+                        if (CountSim(ant, apos) >= ant.TSim)
                         {
-                            Ant apos = branch.Ants.Where(a=>a.Number==ant.ParenTemp).FirstOrDefault();
-                            if (CountSim(ant, apos) >= ant.TSim)
+                            Ant aplus = FindTheMostSimilarAnt(ant, branch.Ants.Where(a => a.ParentIndex == apos.Number).ToList())??apos;
+                            if (CountSim(ant, aplus) < ant.TDissim)
                             {
-                                Ant aplus = FindTheMostSimilarAnt(ant, branch.Ants.Where(a => a.ParentIndex == apos.Number).ToList())??apos;
-                                if (CountSim(ant, aplus) < ant.TDissim)
-                                {
-                                    ant.ParentIndex = apos.Number;
-                                    ant.ParenTemp = 0;
-                                }
-                                else
-                                {
-                                    ChangeSim(ant);
-                                    ant.ParenTemp = PickRandomAnt(branch.Ants.Where(a => a.ParentIndex == apos.Number).ToList(),apos.Number);
-                                }
-
+                                ant.ParentIndex = apos.Number;
+                                ant.ParenTemp = 0;
                             }
                             else
                             {
-                                ant.ParenTemp = PickRandomAnt(branch.Ants.Where(a => a.ParentIndex == apos.Number).ToList(), apos.Number);
-
+                                ChangeSim(ant);
+                                ant.ParenTemp = PickRandomAnt(branch.Ants.Where(a => a.ParentIndex == apos.Number).ToList(),apos.Number);
                             }
+
                         }
+                        else
+                        {
+                            ant.ParenTemp = PickRandomAnt(branch.Ants.Where(a => a.ParentIndex == apos.Number).ToList(), apos.Number);
+
+                        }
+                        
                         i++;
                     }
                 }
@@ -128,7 +127,7 @@ namespace AntTreeProgram
             {
                 if (tempSim< ant.TDissim)
                 {
-                    antBranches.Add(CreateNewBranch(ant, antBranches.Count()));
+                    antBranches.Add(CreateNewBranch(ant, antBranches.Count()+1));
                 }
                 else
                 {
@@ -146,9 +145,8 @@ namespace AntTreeProgram
             double score = 0;
             if (ant!=null && antSupport!=null)
             {
-                double temp = CountDigitData(ant.Points.DigitData, antSupport.Points.DigitData) 
-                    + CountStringData(ant.Points.StringData, antSupport.Points.StringData);
-                double sqrt = Math.Sqrt(temp / (ant.Points.DigitData.Count + ant.Points.StringData.Count));
+                double temp = CountDigitData(ant.Points.DigitData, antSupport.Points.DigitData);
+                double sqrt = Math.Sqrt(temp / ant.Points.DigitData.Count);
                 score = 1-sqrt;
             }
             return Math.Abs(score);

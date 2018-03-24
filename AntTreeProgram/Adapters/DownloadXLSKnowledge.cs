@@ -12,6 +12,7 @@ namespace AntTreeProgram.DataXLS
     {
         List<KnowledgeData> KnowledgeList = new List<KnowledgeData>();
         List<string> nameList { get; set; } = new List<string>();
+        PrepareData prepareData = new PrepareData();
 
         public List<Ant> GetAntTreeList()
         {
@@ -22,11 +23,11 @@ namespace AntTreeProgram.DataXLS
                 Points points = new Points();
                 points.StringData.Add(knowledge.UNS);
                 if (!nameList.Exists(a => a == knowledge.UNS)) nameList.Add(knowledge.UNS);
-                points.DigitData.Add(knowledge.LPR);
-                points.DigitData.Add(knowledge.PEG);
-                points.DigitData.Add(knowledge.SCG);
-                points.DigitData.Add(knowledge.STG);
-                points.DigitData.Add(knowledge.STR);
+                points.DigitData.Add(prepareData.RescaleData(knowledge.LPR,"LPR"));
+                points.DigitData.Add(prepareData.RescaleData(knowledge.PEG,"PEG"));
+                points.DigitData.Add(prepareData.RescaleData(knowledge.SCG, "SCG"));
+                points.DigitData.Add(prepareData.RescaleData(knowledge.STG, "STG"));
+                points.DigitData.Add(prepareData.RescaleData(knowledge.STR, "STR"));
 
                 Ant ant = new Ant(0, 0)
                 {
@@ -55,6 +56,8 @@ namespace AntTreeProgram.DataXLS
             string sheetName = "TEST_DATA";
             var survivalFile = new ExcelQueryFactory(GetPath());
             KnowledgeList = (from knowledgeXLS in survivalFile.Worksheet<KnowledgeData>(sheetName) select knowledgeXLS).ToList();
+            KnowledgeData knowledge = new KnowledgeData();
+            prepareData.AddToDicionary(knowledge, KnowledgeList);
         }
         double PrepareDigit(double digit, double max)
         {

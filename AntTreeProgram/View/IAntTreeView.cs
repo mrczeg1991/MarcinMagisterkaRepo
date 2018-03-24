@@ -33,5 +33,12 @@ namespace AntTreeProgram
         void DrawBranch(AntBranch branch, string name);
         void AddToBranchesCombobox(string name);
         void ClearBranchesCombobox();
+        string GetSimText();
+        string GetDissimText();
+
+        bool GetManula();
+
+        bool GetBranchOperation();
+
     }
 }

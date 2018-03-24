@@ -10,14 +10,21 @@ namespace AntTreeProgram.CheckScoreTools
     {    
         public double Operation(List<AntBranch> antBranches, List<string> nameList, int numberAnts)
         {
-            double temp = 0;
-            foreach(string name in nameList)
+            double sum = 0;
+            foreach(List<Ant> ants in antBranches.Select(b=>b.Ants))
             {
-                var test = antBranches.Select(a => a.Ants.Select(b => b.Points.StringData[0]).Where(d => d == name).Count()).ToList().Max();
-                temp =temp+antBranches.Select(a => a.Ants.Select(b => b.Points.StringData[0]).Where(d => d ==name).Count()).ToList().Max();
+                double max = 0;
+                foreach (string name in nameList)
+                {
+                    double temp = ants.Where(b=>b.Points.StringData[0] == name).Select(a => a).Count();
+                    if(temp>max)
+                    {
+                        max = temp;
+                    }
+                }
+                sum = max + sum;
             }
-            double score = temp / numberAnts;
-            return Math.Round(score,3);
+            return Math.Round(sum/numberAnts,3);
         }
     }
 }

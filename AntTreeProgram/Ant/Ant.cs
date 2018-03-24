@@ -14,6 +14,9 @@ namespace AntTreeProgram
             this.TDissim = TDissim;
         }
         public Points Points { get; set; }
+        /// <summary>
+        /// Numer gałęzi w której znajduje się mrówka
+        /// </summary>
         public int Index { get; set; }
         public int ParentIndex { get; set; }
         public double TSim  { get; set; }

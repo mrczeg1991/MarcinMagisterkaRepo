@@ -45,8 +45,12 @@
             this.c_sim = new System.Windows.Forms.ComboBox();
             this.l_sim = new System.Windows.Forms.Label();
             this.tp_Dane = new System.Windows.Forms.TabPage();
-            this.trvBaseTree = new System.Windows.Forms.TreeView();
             this.cb_Branches = new System.Windows.Forms.ComboBox();
+            this.trvBaseTree = new System.Windows.Forms.TreeView();
+            this.cb_manual = new System.Windows.Forms.CheckBox();
+            this.tb_sim = new System.Windows.Forms.TextBox();
+            this.tb_dissim = new System.Windows.Forms.TextBox();
+            this.cb_branchOperation = new System.Windows.Forms.CheckBox();
             this.tc_Ant.SuspendLayout();
             this.tp_Name.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_Data)).BeginInit();
@@ -92,6 +96,10 @@
             // 
             // p_settings
             // 
+            this.p_settings.Controls.Add(this.cb_branchOperation);
+            this.p_settings.Controls.Add(this.tb_dissim);
+            this.p_settings.Controls.Add(this.tb_sim);
+            this.p_settings.Controls.Add(this.cb_manual);
             this.p_settings.Controls.Add(this.lbl_indexGDI);
             this.p_settings.Controls.Add(this.lbl_clusterPurity);
             this.p_settings.Controls.Add(this.lbl_classificationError);
@@ -112,7 +120,7 @@
             // lbl_indexGDI
             // 
             this.lbl_indexGDI.AutoSize = true;
-            this.lbl_indexGDI.Location = new System.Drawing.Point(11, 190);
+            this.lbl_indexGDI.Location = new System.Drawing.Point(12, 233);
             this.lbl_indexGDI.Name = "lbl_indexGDI";
             this.lbl_indexGDI.Size = new System.Drawing.Size(64, 13);
             this.lbl_indexGDI.TabIndex = 11;
@@ -121,7 +129,7 @@
             // lbl_clusterPurity
             // 
             this.lbl_clusterPurity.AutoSize = true;
-            this.lbl_clusterPurity.Location = new System.Drawing.Point(11, 250);
+            this.lbl_clusterPurity.Location = new System.Drawing.Point(12, 293);
             this.lbl_clusterPurity.Name = "lbl_clusterPurity";
             this.lbl_clusterPurity.Size = new System.Drawing.Size(76, 13);
             this.lbl_clusterPurity.TabIndex = 10;
@@ -130,7 +138,7 @@
             // lbl_classificationError
             // 
             this.lbl_classificationError.AutoSize = true;
-            this.lbl_classificationError.Location = new System.Drawing.Point(11, 230);
+            this.lbl_classificationError.Location = new System.Drawing.Point(12, 273);
             this.lbl_classificationError.Name = "lbl_classificationError";
             this.lbl_classificationError.Size = new System.Drawing.Size(87, 13);
             this.lbl_classificationError.TabIndex = 9;
@@ -138,7 +146,7 @@
             // 
             // btn_Group
             // 
-            this.btn_Group.Location = new System.Drawing.Point(14, 289);
+            this.btn_Group.Location = new System.Drawing.Point(15, 332);
             this.btn_Group.Name = "btn_Group";
             this.btn_Group.Size = new System.Drawing.Size(75, 23);
             this.btn_Group.TabIndex = 4;
@@ -149,7 +157,7 @@
             // lbl_dunn
             // 
             this.lbl_dunn.AutoSize = true;
-            this.lbl_dunn.Location = new System.Drawing.Point(11, 210);
+            this.lbl_dunn.Location = new System.Drawing.Point(12, 253);
             this.lbl_dunn.Name = "lbl_dunn";
             this.lbl_dunn.Size = new System.Drawing.Size(75, 13);
             this.lbl_dunn.TabIndex = 7;
@@ -175,7 +183,7 @@
             // l_NumberGroups
             // 
             this.l_NumberGroups.AutoSize = true;
-            this.l_NumberGroups.Location = new System.Drawing.Point(11, 170);
+            this.l_NumberGroups.Location = new System.Drawing.Point(12, 213);
             this.l_NumberGroups.Name = "l_NumberGroups";
             this.l_NumberGroups.Size = new System.Drawing.Size(65, 13);
             this.l_NumberGroups.TabIndex = 4;
@@ -184,15 +192,15 @@
             // c_dissim
             // 
             this.c_dissim.FormattingEnabled = true;
-            this.c_dissim.Location = new System.Drawing.Point(15, 116);
+            this.c_dissim.Location = new System.Drawing.Point(13, 151);
             this.c_dissim.Name = "c_dissim";
-            this.c_dissim.Size = new System.Drawing.Size(165, 21);
+            this.c_dissim.Size = new System.Drawing.Size(89, 21);
             this.c_dissim.TabIndex = 3;
             // 
             // l_dissim
             // 
             this.l_dissim.AutoSize = true;
-            this.l_dissim.Location = new System.Drawing.Point(12, 100);
+            this.l_dissim.Location = new System.Drawing.Point(10, 135);
             this.l_dissim.Name = "l_dissim";
             this.l_dissim.Size = new System.Drawing.Size(92, 13);
             this.l_dissim.TabIndex = 2;
@@ -201,15 +209,15 @@
             // c_sim
             // 
             this.c_sim.FormattingEnabled = true;
-            this.c_sim.Location = new System.Drawing.Point(15, 76);
+            this.c_sim.Location = new System.Drawing.Point(13, 111);
             this.c_sim.Name = "c_sim";
-            this.c_sim.Size = new System.Drawing.Size(165, 21);
+            this.c_sim.Size = new System.Drawing.Size(89, 21);
             this.c_sim.TabIndex = 1;
             // 
             // l_sim
             // 
             this.l_sim.AutoSize = true;
-            this.l_sim.Location = new System.Drawing.Point(12, 60);
+            this.l_sim.Location = new System.Drawing.Point(10, 95);
             this.l_sim.Name = "l_sim";
             this.l_sim.Size = new System.Drawing.Size(77, 13);
             this.l_sim.TabIndex = 0;
@@ -227,6 +235,15 @@
             this.tp_Dane.Text = "Dane";
             this.tp_Dane.UseVisualStyleBackColor = true;
             // 
+            // cb_Branches
+            // 
+            this.cb_Branches.FormattingEnabled = true;
+            this.cb_Branches.Location = new System.Drawing.Point(6, 12);
+            this.cb_Branches.Name = "cb_Branches";
+            this.cb_Branches.Size = new System.Drawing.Size(121, 21);
+            this.cb_Branches.TabIndex = 5;
+            this.cb_Branches.SelectedIndexChanged += new System.EventHandler(this.cb_Branches_SelectedIndexChanged);
+            // 
             // trvBaseTree
             // 
             this.trvBaseTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -237,14 +254,39 @@
             this.trvBaseTree.Size = new System.Drawing.Size(732, 358);
             this.trvBaseTree.TabIndex = 4;
             // 
-            // cb_Branches
+            // cb_manual
             // 
-            this.cb_Branches.FormattingEnabled = true;
-            this.cb_Branches.Location = new System.Drawing.Point(6, 12);
-            this.cb_Branches.Name = "cb_Branches";
-            this.cb_Branches.Size = new System.Drawing.Size(121, 21);
-            this.cb_Branches.TabIndex = 5;
-            this.cb_Branches.SelectedIndexChanged += new System.EventHandler(this.cb_Branches_SelectedIndexChanged);
+            this.cb_manual.AutoSize = true;
+            this.cb_manual.Location = new System.Drawing.Point(13, 75);
+            this.cb_manual.Name = "cb_manual";
+            this.cb_manual.Size = new System.Drawing.Size(94, 17);
+            this.cb_manual.TabIndex = 12;
+            this.cb_manual.Text = "podaj wartości";
+            this.cb_manual.UseVisualStyleBackColor = true;
+            // 
+            // tb_sim
+            // 
+            this.tb_sim.Location = new System.Drawing.Point(108, 111);
+            this.tb_sim.Name = "tb_sim";
+            this.tb_sim.Size = new System.Drawing.Size(42, 20);
+            this.tb_sim.TabIndex = 13;
+            // 
+            // tb_dissim
+            // 
+            this.tb_dissim.Location = new System.Drawing.Point(108, 152);
+            this.tb_dissim.Name = "tb_dissim";
+            this.tb_dissim.Size = new System.Drawing.Size(42, 20);
+            this.tb_dissim.TabIndex = 14;
+            // 
+            // cb_branchOperation
+            // 
+            this.cb_branchOperation.AutoSize = true;
+            this.cb_branchOperation.Location = new System.Drawing.Point(13, 178);
+            this.cb_branchOperation.Name = "cb_branchOperation";
+            this.cb_branchOperation.Size = new System.Drawing.Size(110, 17);
+            this.cb_branchOperation.TabIndex = 15;
+            this.cb_branchOperation.Text = "operacje w gałęzi";
+            this.cb_branchOperation.UseVisualStyleBackColor = true;
             // 
             // AntTreeViewWF
             // 
@@ -286,6 +328,10 @@
         private System.Windows.Forms.Label lbl_indexGDI;
         private System.Windows.Forms.TreeView trvBaseTree;
         private System.Windows.Forms.ComboBox cb_Branches;
+        private System.Windows.Forms.TextBox tb_dissim;
+        private System.Windows.Forms.TextBox tb_sim;
+        private System.Windows.Forms.CheckBox cb_manual;
+        private System.Windows.Forms.CheckBox cb_branchOperation;
     }
 }
 

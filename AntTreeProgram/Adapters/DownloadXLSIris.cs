@@ -38,6 +38,7 @@ namespace AntTreeProgram.DataXLS
                 points.DigitData.Add(prepareData.RescaleData(iris.PetalWidth, "PetalWidth"));
                 points.DigitData.Add(prepareData.RescaleData(iris.SepalLength, "SepalLength"));
                 points.DigitData.Add(prepareData.RescaleData(iris.SepalWidth, "SepalWidth"));
+                points.StringData.Add(iris.Iris);
                 if (!nameList.Exists(a => a == iris.Iris)) nameList.Add(iris.Iris);
                 Ant ant = new Ant(0, 0)
                 {

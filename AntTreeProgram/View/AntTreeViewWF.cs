@@ -163,5 +163,25 @@ namespace AntTreeProgram
         {
             cb_Branches.Items.Clear();
         }
+
+        public string GetSimText()
+        {
+            return tb_sim.Text;
+        }
+
+        public string GetDissimText()
+        {
+            return tb_dissim.Text;
+        }
+
+        public bool GetManula()
+        {
+            return cb_manual.Checked;
+        }
+
+        public bool GetBranchOperation()
+        {
+            return cb_branchOperation.Checked;
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace AntTreeProgram
         {
             List<double> values = new List<double>()
             {
-                0.005,0.01,0.05,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.85,0.9,0.95,0.98,0.99
+                0.005,0.01,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,0.98,0.99
             };
             foreach(double d in values)
             {
@@ -49,7 +49,7 @@ namespace AntTreeProgram
         {
             List<double> values = new List<double>()
             {
-                0.005,0.01,0.05,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.85,0.9,0.95,0.98,0.99
+                0.005,0.01,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,0.98,0.99
             };
             foreach (double d in values)
             {
@@ -74,13 +74,27 @@ namespace AntTreeProgram
         double GetSim()
         {
             double value = 0;
-            double.TryParse(view.GetSim().ToString(), out value);
+            if (view.GetManula()==false)
+            {
+                double.TryParse(view.GetSim().ToString(), out value);
+            }
+            else
+            {
+                double.TryParse(view.GetSimText(), out value);
+            }
             return value;
         }
         double GetDissim()
         {
             double value = 0;
-            double.TryParse(view.GetDissim().ToString(), out value);
+            if (view.GetManula() == false)
+            {
+                double.TryParse(view.GetDissim().ToString(), out value);
+            }
+            else
+            {
+                double.TryParse(view.GetDissimText(), out value);
+            }
             return value;
         }
         public void GroupData()
@@ -96,14 +110,16 @@ namespace AntTreeProgram
                 a.TSim = GetSim();
             });
             AntTree antTreeAlgorythm = new AntTree();
-            antBranches = antTreeAlgorythm.AntTreeAlgorythm(antsList);
+            antBranches = antTreeAlgorythm.AntTreeAlgorythm(antsList, view.GetBranchOperation());
             view.AddToGrid(xls.GetList(), antBranches);
-            //ClusterPurity error = new ClusterPurity();
-            //double purity = error.Operation(antBranches, xls.GetNameList(), xls.GetAntTreeList().Count());
-            //view.SetErrorPurity(purity.ToString());
-            //view.SetClassificationError(Math.Round((1-purity),3).ToString());
+            ClusterPurity purity = new ClusterPurity();
+            ClassificationError error = new ClassificationError();
+            double purityScore = purity.Operation(antBranches, xls.GetNameList(), xls.GetAntTreeList().Count());
+            double errorScore = error.Operation(antsList);
+            view.SetErrorPurity(purityScore.ToString());
+            view.SetClassificationError(errorScore.ToString());
             GDIIndex gdi = new GDIIndex();
-            //view.SetGDIIndex(gdi.CountGDIIndex(antBranches).ToString());
+            view.SetGDIIndex(gdi.CountGDIIndex(antBranches).ToString());
             view.ClearBranchesCombobox();
             antBranches.ForEach(a=>view.AddToBranchesCombobox($"Gałąź {a.Index}"));
         }

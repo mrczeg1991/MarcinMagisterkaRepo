@@ -13,7 +13,10 @@ namespace AntTreeProgram
         public DunnIndex(List<AntBranch> antBranches)
         {
             antTree = new AntTree();
-            DunnIndexValue = Math.Round(TheBiggestSimilarInTheDifferenceBranchs(antBranches) / TheBiggestDifferenceInTheBranch(antBranches),3);
+            if (antBranches.Count > 1)
+            {
+                DunnIndexValue = Math.Round(TheBiggestSimilarInTheDifferenceBranchs(antBranches) / TheBiggestDifferenceInTheBranch(antBranches), 3);
+            }
         }
         public DunnIndex()
         {
@@ -22,8 +25,7 @@ namespace AntTreeProgram
         public double TheBiggestDifferenceInTheBranch(List<AntBranch> antBranches)
         {
             double min = 1;
-            int number, numbertemp,group = 0;
-            
+            int number, numbertemp,group = 0;           
             foreach (AntBranch branch in antBranches)
             {
                 foreach (Ant ant in branch.Ants)
