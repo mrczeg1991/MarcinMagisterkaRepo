@@ -14,7 +14,7 @@ namespace AntTreeProgram.CheckScoreTools
             double sum = 0;
             foreach(Ant ant in ants.OrderBy(s=>s.Number))
             {
-                List<Ant> temp = ants.Where(a => a.Number > ant.Number).ToList();
+                List<Ant> temp = ants.Where(a => a.Number != ant.Number).ToList();
                 sum += temp.Count();
                 error+=CountError(temp, ant);
             }

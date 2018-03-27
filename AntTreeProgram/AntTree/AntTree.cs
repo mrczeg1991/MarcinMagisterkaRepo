@@ -191,7 +191,7 @@ namespace AntTreeProgram
             double min = double.MinValue;
             foreach (AntBranch branch in antBranches)
             {
-                Ant antTemp=branch.Ants.Where(a=>branch.Index==a.Index).FirstOrDefault();
+                Ant antTemp=branch.Ants[0];
                 double scoreTemp = CountSim(ant, antTemp);
                 if (scoreTemp > min) minAnt = antTemp;
             }

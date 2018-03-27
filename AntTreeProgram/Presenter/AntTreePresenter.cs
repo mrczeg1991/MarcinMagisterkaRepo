@@ -99,8 +99,7 @@ namespace AntTreeProgram
         }
         public void GroupData()
         {
-            view.SetDunnIndex(0);
-            view.SetGroupNumber(0);
+            ClearData();
             IDownloadXLS xls = FabrykaXLS.CreateXLSObject(view.GetRepoName());
             xls.ReadData();
             antsList = xls.GetAntTreeList();
@@ -123,6 +122,16 @@ namespace AntTreeProgram
             view.ClearBranchesCombobox();
             antBranches.ForEach(a=>view.AddToBranchesCombobox($"Gałąź {a.Index}"));
         }
+        void ClearData()
+        {
+            view.SetErrorPurity("0");
+            view.SetClassificationError("0");
+            view.SetGDIIndex("0");
+             view.SetDunnIndex(0);
+            view.SetGroupNumber(0);
+
+        } 
+
         public void ShowBranch(int index)
         {
             view.DrawBranch(antBranches.Where(a=>a.Index==index).FirstOrDefault(), $"Gałąź {index}");

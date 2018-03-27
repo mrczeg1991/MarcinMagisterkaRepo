@@ -22,7 +22,7 @@ namespace AntTreeProgram.DataXLS
             foreach (WineData wine in WineList.Where(a=>a.Alcohol>0))
             {
                 Points points = new Points();
-                //points.StringData.Add(wine.Type);
+                points.StringData.Add(wine.Type);
                 if (!nameList.Exists(a => a == wine.Type)) nameList.Add(wine.Type);
                 points.DigitData.Add(prepareData.RescaleData(wine.Alcohol, "Alcohol"));
                 points.DigitData.Add(prepareData.RescaleData(wine.MalicAcid, "MalicAcid"));
@@ -50,7 +50,7 @@ namespace AntTreeProgram.DataXLS
     
         public object GetList()
         {
-            return WineList;
+            return WineList.Where(a=>a.Alcohol>0);
         }
 
         public string GetPath()
@@ -65,7 +65,7 @@ namespace AntTreeProgram.DataXLS
             var wineFile = new ExcelQueryFactory(GetPath());
             WineList = (from wineXLS in wineFile.Worksheet<WineData>(sheetName) select wineXLS).ToList();
             WineData data = new WineData();
-            prepareData.AddToDicionary(data, WineList);
+            prepareData.AddToDicionary(data, WineList.Where(a=>a.Alcohol>0));
         }
         double PrepareDigit(double digit, double max)
         {
