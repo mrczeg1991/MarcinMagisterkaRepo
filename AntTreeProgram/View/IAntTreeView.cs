@@ -1,5 +1,6 @@
 ﻿using AntTreeProgram.Adapters;
 using AntTreeProgram.DataXLS;
+using AntTreeProgram.Other;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -39,6 +40,10 @@ namespace AntTreeProgram
         bool GetManula();
 
         bool GetBranchOperation();
+        void AddToSortCombobox(string name);
+        string GetSortKind();
+        void AddToMiaraCombobox(Miara name);
 
+        string GetMiara();
     }
 }

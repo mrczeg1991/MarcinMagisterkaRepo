@@ -63,7 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\PrepareData.cs" />
+    <Compile Include="AntTreeClass\CountMeasure.cs" />
+    <Compile Include="CheckScoreTools\ClassificationError.cs" />
+    <Compile Include="CheckScoreTools\ClusterPurity.cs" />
+    <Compile Include="CheckScoreTools\DunnIndex.cs" />
     <Compile Include="CheckScoreTools\GDIIndex.cs" />
+    <Compile Include="CheckScoreTools\Sort.cs" />
+    <Compile Include="CheckScoreTools\TheBestScore.cs" />
     <Compile Include="Data\GlassData.cs" />
     <Compile Include="Data\IrisData.cs" />
     <Compile Include="Data\KnowledgeData.cs" />
@@ -71,7 +77,8 @@
     <Compile Include="Data\WineData.cs" />
     <Compile Include="Ant\Ant.cs" />
     <Compile Include="Ant\AntBranch.cs" />
-    <Compile Include="AntTree\AntTree.cs" />
+    <Compile Include="AntTreeClass\AntTree.cs" />
+    <Compile Include="Other\EnumData.cs" />
     <Compile Include="Presenter\AntTreePresenter.cs" />
     <Compile Include="View\AntTreeViewWF.cs">
       <SubType>Form</SubType>
@@ -79,10 +86,7 @@
     <Compile Include="View\AntTreeViewWF.Designer.cs">
       <DependentUpon>AntTreeViewWF.cs</DependentUpon>
     </Compile>
-    <Compile Include="CheckScoreTools\ClassificationError.cs" />
-    <Compile Include="CheckScoreTools\ClusterPurity.cs" />
     <Compile Include="Other\Colors.cs" />
-    <Compile Include="CheckScoreTools\DunnIndex.cs" />
     <Compile Include="Adapters\DownloadXLSKnowledge.cs" />
     <Compile Include="Adapters\DownloadXLSGlass.cs" />
     <Compile Include="Adapters\DownloadXLSIris.cs" />

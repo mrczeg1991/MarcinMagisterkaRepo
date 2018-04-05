@@ -35,6 +35,6 @@ namespace AntTreeProgram.Adapters
             double score = (digit - min) / (max - min);
             return score;
 
-        }
+        }      
     }
 }

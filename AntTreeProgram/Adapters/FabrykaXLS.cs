@@ -8,7 +8,7 @@ namespace AntTreeProgram.DataXLS
 {
     public enum XLSData
     {
-        Iris, Wina, Glass, Survival, Knowledge
+        Iris, Wina, Szkła, Przeżycia, Wiedza
     }
     class FabrykaXLS
     {
@@ -27,17 +27,17 @@ namespace AntTreeProgram.DataXLS
                         objectXLS = new DownloadXLSIris();
                     }
                     break;
-                case (XLSData.Glass):
+                case (XLSData.Szkła):
                     {
                         objectXLS = new DownloadXLSGlass();
                     }
                     break;
-                case (XLSData.Survival):
+                case (XLSData.Przeżycia):
                     {
                         objectXLS = new DownloadXLSSurvival();
                     }
                     break;
-                case (XLSData.Knowledge):
+                case (XLSData.Wiedza):
                     {
                         objectXLS = new DownloadXLSKnowledge();
                     }

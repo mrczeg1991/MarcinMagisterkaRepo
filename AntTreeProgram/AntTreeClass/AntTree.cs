@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntTreeProgram.Other;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace AntTreeProgram
     class AntTree
     {
         Colors color = null;
+        Miara miara = Miara.euklidesowa;
         public AntTree()
         {
             color = new Colors();
@@ -20,8 +22,6 @@ namespace AntTreeProgram
             List<AntBranch> antBranches = new List<AntBranch>();
             AddToBranches(antsList, antBranches);
             if(branchOperation) BranchesOperation(antBranches, antsList);
-            //Thread thr = new Thread(()=>BranchesOperation(antBranches, antsList));
-            //thr.Start();
             return antBranches;
         }
 
@@ -146,10 +146,11 @@ namespace AntTreeProgram
             if (ant!=null && antSupport!=null)
             {
                 double temp = CountDigitData(ant.Points.DigitData, antSupport.Points.DigitData);
-                double sqrt = Math.Sqrt(temp / ant.Points.DigitData.Count);
+                double tempToSqrt = temp / ant.Points.DigitData.Count;
+                double sqrt = Math.Sqrt(tempToSqrt);
                 score = 1-sqrt;
             }
-            return Math.Abs(score);
+            return score;
         }
         double CountStringData(List<string> antData, List<string> antSupportData)
         {
@@ -168,7 +169,8 @@ namespace AntTreeProgram
             int i = 0;
             foreach (double digit in ant)
             {
-                score = Math.Pow(digit - antSupport[i], 2) + score;
+                double temp = Math.Pow(digit - antSupport[i],2);
+                score =+ temp;
                 i++;
             }
             return score;
@@ -199,3 +201,4 @@ namespace AntTreeProgram
         }
     }
 }
+

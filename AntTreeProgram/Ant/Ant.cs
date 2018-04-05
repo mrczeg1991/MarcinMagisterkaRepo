@@ -24,6 +24,7 @@ namespace AntTreeProgram
         public int Number { get; set; }
 
         public int ParenTemp { get; set; }
+        public double AvgSim { get; set; }
 
     }
 }

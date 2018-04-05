@@ -12,6 +12,7 @@ using AntTreeProgram.DataXLS;
 using System.Threading;
 using System.Drawing.Drawing2D;
 using System.Collections;
+using AntTreeProgram.Other;
 
 namespace AntTreeProgram
 {
@@ -182,6 +183,72 @@ namespace AntTreeProgram
         public bool GetBranchOperation()
         {
             return cb_branchOperation.Checked;
+        }
+        public void AddToSortCombobox(string name)
+        {
+            cb_RodzajSortowania.Items.Add(name);
+        }
+        public string GetSortKind()
+        {
+            object value = cb_RodzajSortowania.SelectedItem ?? "Domyślnie";
+            return (string)value;
+        }
+
+        private void btn_AutomaticGroup_Click(object sender, EventArgs e)
+        {
+            controler.GroupAutomatic();
+        }
+
+        private void tb_sim_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar)
+                  && !char.IsDigit(e.KeyChar)
+                  && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == ','
+                && (sender as TextBox).Text.IndexOf(',') > -1)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tb_dissim_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar)
+               && !char.IsDigit(e.KeyChar)
+               && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == ','
+                && (sender as TextBox).Text.IndexOf(',') > -1)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cb_manual_CheckedChanged(object sender, EventArgs e)
+        {
+            tb_dissim.Enabled = cb_manual.Checked;
+            tb_sim.Enabled = cb_manual.Checked;
+            if(!cb_manual.Checked)
+            {
+                tb_dissim.Text = "";
+                tb_sim.Text = "";
+            }
+        }
+
+        public void AddToMiaraCombobox(Miara name)
+        {
+            cb_miaraOdleglosci.Items.Add(name);
+        }
+
+        public string GetMiara()
+        {
+            object value = cb_RodzajSortowania.SelectedItem ?? "euklidesowa";
+            return (string)value;
         }
     }
 }
