@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntTreeProgram.Other;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,8 @@ namespace AntTreeProgram.CheckScoreTools
 
         public double Purity { get; set; }
         public double Error { get; set; } = 1;
+
+        public Miara Miara { get; set; }
 
 
 

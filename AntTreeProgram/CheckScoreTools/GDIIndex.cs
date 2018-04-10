@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntTreeProgram.Other;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,15 @@ namespace AntTreeProgram.CheckScoreTools
 {
     class GDIIndex
     {
+
         public double GDIIndexValue { get; set; }
-        public DunnIndex Dunn { get; set; } = new DunnIndex();
-        AntTree antTree = new AntTree();
-        public double CountGDIIndex(List<AntBranch> antBranches)
+        DunnIndex Dunn = null;
+        AntTree antTree = null;
+        public double CountGDIIndex(List<AntBranch> antBranches, Miara miara)
         {
             double score = 0;
+            Dunn = new DunnIndex(miara);
+            antTree = new AntTree(miara);
             if (antBranches.Count() > 1)
             {
                 List<double> antsSim = new List<double>();
@@ -32,7 +36,7 @@ namespace AntTreeProgram.CheckScoreTools
                         {
                             foreach (Ant antTemp in branchTemp.Ants)
                             {
-                                simInBranch = Math.Abs(simInBranch + antTree.CountSim(antTemp, ant));
+                                simInBranch+=antTree.CountSim(antTemp, ant);
                             }
                             simInBranch = simInBranch / (branchTemp.Ants.Count + branch.Ants.Count);
                         }
@@ -41,7 +45,7 @@ namespace AntTreeProgram.CheckScoreTools
                             double sim = 0;
                             foreach (Ant antTemp in branchTemp.Ants)
                             {
-                                sim = Math.Abs(sim + antTree.CountSim(antTemp, ant));
+                                sim+=antTree.CountSim(antTemp, ant);
                             }
                             tempSim[branchTemp.Index] = sim / (branchTemp.Ants.Count + branch.Ants.Count);
                         }
@@ -49,7 +53,7 @@ namespace AntTreeProgram.CheckScoreTools
                     antsSim.AddRange(tempSim.Select(a => a.Value));
                     antsSimInBranch.Add(simInBranch);
                 }
-                score = Math.Round(antsSim.Min() / antsSimInBranch.Max(), 3);
+                score = Math.Round(antsSimInBranch.Min()/ antsSim.Max(), 3);
             }
             return score;
         }

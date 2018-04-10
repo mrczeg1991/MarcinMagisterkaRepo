@@ -82,6 +82,9 @@ namespace AntTreeProgram
         }
         public void AddToGrid(object data, List<AntBranch> branches)
         {
+            dg_Data.DataBindingComplete -= (sender2, e2) => Dg_Data_DataBindingComplete(sender2, e2, branches);
+            dg_Data.Rows.Clear();
+            dg_Data.Refresh();
             var source = new BindingSource();
             dg_Data.DataBindingComplete += (sender2, e2) => Dg_Data_DataBindingComplete(sender2, e2, branches);
             source.DataSource = data;
@@ -93,13 +96,20 @@ namespace AntTreeProgram
 
         private void Dg_Data_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e, List<AntBranch> branches)
         {
-            foreach (AntBranch branch in branches)
+            try
             {
-                foreach (Ant ant in branch.Ants)
+                foreach (AntBranch branch in branches)
                 {
-                    DataGridViewRow row = dg_Data.Rows[ant.Number-1];// get you required index
-                    row.DefaultCellStyle.BackColor = branch.AntColor;
+                    foreach (Ant ant in branch.Ants)
+                    {
+                        DataGridViewRow row = dg_Data.Rows[ant.Number - 1];// get you required index
+                        row.DefaultCellStyle.BackColor = branch.AntColor;
+                    }
                 }
+            }
+            catch
+            {
+
             }
         }
         private void btn_Group_Click_1(object sender, EventArgs e)
@@ -245,10 +255,21 @@ namespace AntTreeProgram
             cb_miaraOdleglosci.Items.Add(name);
         }
 
-        public string GetMiara()
+        public Miara GetMiara()
         {
-            object value = cb_RodzajSortowania.SelectedItem ?? "euklidesowa";
-            return (string)value;
+            object value = cb_miaraOdleglosci.SelectedItem ?? Miara.euklidesowa;
+            return (Miara)value;
+        }
+
+        public void AddToGrid(object theBest)
+        {
+            dg_Data.Rows.Clear();
+            dg_Data.Refresh();
+            var source = new BindingSource();
+            source.DataSource = theBest;
+            dg_Data.DataSource = source;
+            dg_Data.ReadOnly = true;
+            dg_Data.Enabled = true;
         }
     }
 }

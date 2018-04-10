@@ -25,6 +25,7 @@ namespace AntTreeProgram
 
         void SetDunnIndex(double index);
 
+        void AddToGrid(object theBest);
 
         void AddToGrid(object iris, List<AntBranch> branches);
 
@@ -43,7 +44,6 @@ namespace AntTreeProgram
         void AddToSortCombobox(string name);
         string GetSortKind();
         void AddToMiaraCombobox(Miara name);
-
-        string GetMiara();
+        Miara GetMiara();
     }
 }

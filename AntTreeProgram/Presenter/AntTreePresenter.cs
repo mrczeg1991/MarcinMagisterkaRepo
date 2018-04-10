@@ -136,7 +136,7 @@ namespace AntTreeProgram
             ClearData();
             TakeDataFromXLS();
             GetNewSim(GetDissim(), GetSim());
-            AntTree antTreeAlgorythm = new AntTree();
+            AntTree antTreeAlgorythm = new AntTree(view.GetMiara());
             List<Ant> sortedList = SortData(antsList, view.GetSortKind());
             antBranches = antTreeAlgorythm.AntTreeAlgorythm(sortedList, view.GetBranchOperation());
             view.AddToGrid(xls.GetList(), antBranches);
@@ -150,7 +150,7 @@ namespace AntTreeProgram
         double CountGDI()
         {
             GDIIndex gdi = new GDIIndex();
-            double gdiClass=gdi.CountGDIIndex(antBranches);
+            double gdiClass=gdi.CountGDIIndex(antBranches, view.GetMiara());
             return gdiClass;
         }
         double CountPurity()
@@ -167,89 +167,113 @@ namespace AntTreeProgram
         }
         double CountDunnIndex()
         {
-            DunnIndex dunnIndex = new DunnIndex(antBranches);
+            DunnIndex dunnIndex = new DunnIndex(antBranches, view.GetMiara());
             return dunnIndex.DunnIndexValue;
 
         }
         public void GroupAutomatic()
         {
             TakeDataFromXLS();
-            TheBestScore gdi = new TheBestScore();
-            TheBestScore dunn = new TheBestScore();
-            TheBestScore purity = new TheBestScore();
-            TheBestScore error = new TheBestScore();
+            List<TheBestScore> theBest = new List<TheBestScore>();
             List<double> values = new List<double>();
             double tmp=0.001;
             values.Add(0.005);
             while(tmp<1)
             {
                 values.Add(tmp);
-                tmp+=0.01;
+                tmp+=0.05;
             }
-
-            foreach (string kind in tabKind)
+            foreach (Miara miara in Enum.GetValues(typeof(Miara)))
             {
-                foreach (double simTem in values.Where(d=>d>0.6))
+                TheBestScore purity = new TheBestScore();
+                foreach (string kind in tabKind)
                 {
-                    foreach (double dissimTemp in values.Where(d=>d<simTem))
+                    foreach (double simTem in values.Where(d => d > 0.7))
                     {
-                        AntTree antTreeAlgorythm = new AntTree();
-                        antsList = xls.GetAntTreeList();
-                        List<Ant> sortedList = SortData(antsList, kind);
-                        GetNewSim(dissimTemp, simTem);
-                        antBranches = antTreeAlgorythm.AntTreeAlgorythm(sortedList, false);
-                        if (antBranches.Count == 3)
+                        foreach (double dissimTemp in values.Where(d => d < simTem))
                         {
-                            double tempDunn = CountDunnIndex();
-                            double tempGdi = CountGDI();
-                            double tempError = CountError();
-                            double tempPurity = CountPurity();
-                            if (tempDunn > dunn.Dunn)
-                            {
-                                dunn.Dunn = tempDunn;
-                                dunn.Purity = tempPurity;
-                                dunn.Gdi = tempGdi;
-                                dunn.Error = tempError;
-                                dunn.Sim = simTem;
-                                dunn.Dissim = dissimTemp;
-                                dunn.Kind = kind;
-                            }
-                            if (tempGdi > gdi.Gdi)
-                            {
-                                gdi.Dunn = tempDunn;
-                                gdi.Purity = tempPurity;
-                                gdi.Gdi = tempGdi;
-                                gdi.Error = tempError;
-                                gdi.Sim = simTem;
-                                gdi.Dissim = dissimTemp;
-                                gdi.Kind = kind;
-                            }
-                            if (tempError < error.Error)
-                            {
-                                error.Dunn = tempDunn;
-                                error.Purity = tempPurity;
-                                error.Gdi = tempGdi;
-                                error.Error = tempError;
-                                error.Sim = simTem;
-                                error.Dissim = dissimTemp;
-                                error.Kind = kind;
-                            }
-                            if (tempPurity > purity.Purity)
-                            {
-                                purity.Dunn = tempDunn;
+                            AntTree antTreeAlgorythm = new AntTree(miara);
+                            antsList = xls.GetAntTreeList();
+                            List<Ant> sortedList = SortData(antsList, kind);
+                            GetNewSim(dissimTemp, simTem);
+                            antBranches = antTreeAlgorythm.AntTreeAlgorythm(sortedList, false);
+                            //if (antBranches.Count == ReturnGroupNumber())
+                            //{
+                                double tempPurity = CountPurity();
                                 purity.Purity = tempPurity;
-                                purity.Gdi = tempGdi;
-                                purity.Error = tempError;
                                 purity.Sim = simTem;
                                 purity.Dissim = dissimTemp;
                                 purity.Kind = kind;
-                            }
+                                purity.Miara = miara;
+                                if (tempPurity >= purity.Purity && miara==Miara.euklidesowa)
+                                {                                  
+                                    theBest.Add(ReturnToTheBestList(purity));
+                                }
+                                if (tempPurity >= purity.Purity && miara == Miara.kosinusowa)
+                                {
+                                    theBest.Add(ReturnToTheBestList(purity));
+                                }
+                                if (tempPurity >= purity.Purity && miara == Miara.miejska)
+                                {
+                                    theBest.Add(ReturnToTheBestList(purity));
+                                }
+                            //}
+                            
                         }
                     }
                 }
             }
-            string a = "d";
+            AddAutoRecordToGrid(theBest);
+        }
+        TheBestScore ReturnToTheBestList(TheBestScore toAdd)
+        {
+            TheBestScore temp = new TheBestScore();
+            temp.Purity = toAdd.Purity;
+            temp.Sim = toAdd.Sim;
+            temp.Dissim = toAdd.Dissim;
+            temp.Kind = toAdd.Kind;
+            temp.Miara = toAdd.Miara;
+            temp.Gdi = CountGDI();
+            temp.Dunn = CountDunnIndex();
+            temp.Error = CountError();
+            return temp;
+        }
+        void AddAutoRecordToGrid(List<TheBestScore> theBest)
+        {
+            view.AddToGrid(theBest.OrderBy(d=>d.Purity).ToList());
+        }
 
+        int ReturnGroupNumber()
+        {
+            int number = 1;
+            switch(view.GetRepoName())
+            {
+                case (XLSData.Iris):
+                    {
+                        number = 3;
+                    }break;
+                case (XLSData.Wiedza):
+                    {
+                        number = 4;
+                    }
+                    break;
+                case (XLSData.Przeżycia):
+                    {
+                        number = 2;
+                    }
+                    break;
+                case (XLSData.Wina):
+                    {
+                        number = 3;
+                    }
+                    break;
+                case (XLSData.Szkła):
+                    {
+                        number = 6;
+                    }
+                    break;
+            }
+            return number;
         }
         void ClearData()
         {
@@ -264,7 +288,7 @@ namespace AntTreeProgram
         List<Ant> SortData(List<Ant> data, string kind)
         {
             Sort sortData = new Sort();
-            sortData.PrepareOrderData(data);
+            sortData.PrepareOrderData(data, view.GetMiara());
             switch(kind)
             {
                 case ("Malejąco"):
@@ -284,7 +308,7 @@ namespace AntTreeProgram
 
         public void ShowBranch(int index)
         {
-            view.DrawBranch(antBranches.Where(a=>a.Index==index).FirstOrDefault(), $"Gałąź {index}");
+            view.DrawBranch(antBranches.Where(a=>a.Index==index+1).FirstOrDefault(), $"Gałąź {index}");
         }
     }
 }

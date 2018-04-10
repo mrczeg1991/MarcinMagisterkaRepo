@@ -13,9 +13,10 @@ namespace AntTreeProgram
     {
         Colors color = null;
         Miara miara = Miara.euklidesowa;
-        public AntTree()
+        public AntTree(Miara miara)
         {
             color = new Colors();
+            this.miara = miara;
         }
         public List<AntBranch> AntTreeAlgorythm(List<Ant> antsList, bool branchOperation)
         {
@@ -117,6 +118,12 @@ namespace AntTreeProgram
         {
             Ant theMostSimilar=FindTheMostSimilarAntInBranches(ant, antBranches);
             double tempSim = CountSim(ant, theMostSimilar);
+            if(ant.Points.StringData[0]!= "Iris-setosa" && ant.Points.StringData[0] != "Iris-versicolor")
+            {
+                //Iris-versicolor
+                string a = "ddd";
+                //tempSim = tempSim - 0.6;
+            }
             if (tempSim>=ant.TSim)
             {
                 ant.Index = theMostSimilar.Index;
@@ -145,36 +152,30 @@ namespace AntTreeProgram
             double score = 0;
             if (ant!=null && antSupport!=null)
             {
-                double temp = CountDigitData(ant.Points.DigitData, antSupport.Points.DigitData);
-                double tempToSqrt = temp / ant.Points.DigitData.Count;
-                double sqrt = Math.Sqrt(tempToSqrt);
-                score = 1-sqrt;
+                CountMeasure count = new CountMeasure(ant.Points, antSupport.Points);
+                switch(miara)
+                {
+                    case (Miara.euklidesowa):
+                        {
+                            score = count.EuklidesowaCount();
+
+                        }
+                        break;
+                    case (Miara.miejska):
+                        {
+                            score = count.MiejscaCount();
+                        }
+                        break;
+                    case (Miara.kosinusowa):
+                        {
+                            score = count.CosinusowaCount();
+                        }
+                        break;
+                }
             }
             return score;
         }
-        double CountStringData(List<string> antData, List<string> antSupportData)
-        {
-            double score = 0;
-            int i = 0;
-            foreach(string temp in antData)
-            {
-                if (temp != antSupportData[i]) score++;
-                    i++;
-            }
-            return score;
-        }
-        double CountDigitData(List<double> ant, List<double> antSupport)
-        {
-            double score = 0;
-            int i = 0;
-            foreach (double digit in ant)
-            {
-                double temp = Math.Pow(digit - antSupport[i],2);
-                score =+ temp;
-                i++;
-            }
-            return score;
-        }
+  
         Ant FindTheMostSimilarAnt(Ant ant, List<Ant> antBranches)
         {
             // Sim 1 to takie same

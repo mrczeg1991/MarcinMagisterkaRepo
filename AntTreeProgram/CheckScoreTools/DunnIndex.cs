@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntTreeProgram.Other;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,17 +10,17 @@ namespace AntTreeProgram
     {
         AntTree antTree = null;
         public double DunnIndexValue { get; set; }
-        public DunnIndex(List<AntBranch> antBranches)
+        public DunnIndex(List<AntBranch> antBranches, Miara miara)
         {
-            antTree = new AntTree();
+            antTree = new AntTree(miara);
             if (antBranches.Count > 1)
             {
                 DunnIndexValue = Math.Round(TheBiggestSimilarInTheDifferenceBranchs(antBranches) / TheBiggestDifferenceInTheBranch(antBranches), 3);
             }
         }
-        public DunnIndex()
+        public DunnIndex(Miara miara)
         {
-            antTree = new AntTree();
+            antTree = new AntTree(miara);
         }
         public double TheBiggestDifferenceInTheBranch(List<AntBranch> antBranches)
         {

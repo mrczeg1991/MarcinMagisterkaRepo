@@ -8,6 +8,6 @@ namespace AntTreeProgram.Other
 {
     public enum Miara
     {
-        euklidesowa, miejska
+        euklidesowa, miejska, kosinusowa
     }
 }

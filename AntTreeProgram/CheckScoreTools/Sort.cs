@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntTreeProgram.Other;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace AntTreeProgram.Data
 {
     class Sort
     {
-        public void PrepareOrderData(List<Ant> listPoints)
+        public void PrepareOrderData(List<Ant> listPoints, Miara miara)
         {
-            AntTree antTree = new AntTree();
+            AntTree antTree = new AntTree(miara);
             double min = 1;
             foreach (Ant ant in listPoints)
             {
@@ -26,7 +27,6 @@ namespace AntTreeProgram.Data
                 }
                 ant.AvgSim = sim / (listPoints.Count - 1);
             }
-            string dupa = "sss";
         }
     }
 }

@@ -37,7 +37,5 @@ namespace AntTreeProgram.Adapters
         public double OD280_OD315 { get; set; }
         [ExcelColumn("Proline")]
         public double Proline{ get; set; }
-
-        public double dddd = 0;
     }
 }
